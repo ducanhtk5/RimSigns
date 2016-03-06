@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Sign Estimation contractor signs services| customized yard signs| commercial signCoppell";
+    ViewBag.Keywords = "sign for advertising Carrollton, cheap contractor signs, sign for advertising near Coppell, outdoor business sign Dallas, sign for advertising Carrollton";
+    ViewBag.Description = "Real Estate Media signs are made and installed in-house by our team of 9 dedicated employees to ensure strict quality control and accountability.";
+}
+@using CMSApplication.Models;
+@model CMSApplication.Models.EstimatePage
+
+<div data-role="header" data-position="fixed">
+    <h1>Sign Estimation</h1>
+    <a href="#sideNav" id="navIcon"><i class="icon-th-list"></i></a>
+</div>
+
+<div data-role="content">
+<div class="row-fluid" >
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>Please enter your information on the form below</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("EstimatePage_Submit", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class="validation", @id="EstimatePage_Submit" }))
+            {
+                <div class="warning-area">
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Full name :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Name, new {  @class="validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                      Phone number :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Phone, new {  @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Company Name :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.CompanyName, new {  @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Email :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Email, new {@class = "validate[required,custom(email)]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Description :
+                    </div>
+                    <div class="span9">
+                        @Html.TextAreaFor(model => Model.Comment, new { @style = "width: 100%; height:150px", @class = "validate[required]" })
+                        </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Attach files</div>
+                    <div class="span3" id="upload_list"><input type="file" name="FileUp" />
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        &nbsp;
+                    </div>
+                    <div class="span5">
+                        <!-- captcha -->
+                        @Html.ValidationSummary(true)   
+                        @Html.Partial("_Captcha", new CMSApplication.Areas.Administration.Models.Captcha())
+                        @Html.Partial("_InvisibleCaptcha", new CMSApplication.Areas.Administration.Models.InvisibleCaptcha())    
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                
+                <div class="row-form">
+                                             
+                    <input type="submit" name="save" value="Submit" class="btn"  data-theme="b" data-inline="false" id="submitbutton"/>
+                     <div class="clear"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</div>
+
+<script language=javascript>
+    jQuery(document).ready(function () {
+        jQuery("#EstimatePage_Submit").submit(function () {
+            // validate
+            if (jQuery("#Name").val() == "") {
+                alert("Please enter your name");
+                jQuery("#Name").focus();
+                return false;
+            }
+
+            if (jQuery("#Phone").val() == "") {
+                alert("Please enter your phone number");
+                jQuery("#Phone").focus();
+                return false;
+            }
+            
+            if (jQuery("#CompanyName").val() == "") {
+                alert("Please enter your company name");
+                jQuery("#CompanyName").focus();
+                return false;
+            }
+
+            if (jQuery("#Email").val() == "") {
+                alert("Please enter your email address");
+                jQuery("#Email").focus();
+                return false;
+            }
+
+            if (jQuery("#Comment").val() == "") {
+                alert("Please enter comment");
+                jQuery("#Comment").focus();
+                return false;
+            }
+
+            if (jQuery("#CaptchaValue").val() == "") {
+                alert("Please enter security code");
+                jQuery("#CaptchaValue").focus();
+                return false;
+            }
+        });
+    });
+</script>

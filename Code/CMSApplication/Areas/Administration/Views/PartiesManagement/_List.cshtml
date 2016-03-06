@@ -1,0 +1,121 @@
+﻿@model CMS.Common.Helpers.PagedData<CMSApplication.Areas.Administration.Models.PartiesModels>
+<script type="text/javascript">    
+    $(document).ready(function () {
+        $(".page-number").live("click", function () {
+            var page = parseInt($(this).html());
+            $.get("/Administration/PartiesManagement/List?&page=" + page, function (data) {
+                $(".list").html("");
+                $(".list").html(data);
+            });
+        });
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var NameItem = $this.closest('tr').find('.spanName').html();
+            if (confirm("Are you sure delete party : " + NameItem + "")) {
+                var IdItem = $this.closest('tr').find('.Spanid').html();
+                $.get("/Administration/PartiesManagement/Delete?Id=" + IdItem, function () {
+                    var page = parseInt($(".page-number-Current").html());
+                    $.get("/Administration/PartiesManagement/List?page=" + page, function (data) {
+                        $(".list").html("");
+                        $(".list").html(data);
+                    });
+                });
+            }
+        });
+
+    });
+
+</script>
+@if (Model.Data.Count() > 0)
+{
+    <table class="table dataTable" style="width:100%">
+        <thead>
+            <th>
+                Name
+            </th>            
+            <th>
+                OrderName
+            </th>
+            <th>
+                Assign By
+            </th>
+            <th style="width: 67px;">
+                Date Assign
+            </th>
+            <th width="10px">
+                Action
+            </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            {
+                <tr>
+                    <td>
+                        <span class="Spanid" style="display: none;">@item.Id</span> 
+                        <span class="spanName">@item.Name
+                        </span>
+                    </td>                    
+                    <td>
+                        <span >@item.OrderName </span>
+                    </td>
+                    <td>
+                        <span >@item.AssignByName </span>
+                    </td>
+                    <td>
+                        <span >@string.Format("{0:MM/dd/yyyy}", item.DateAssign) </span>
+                    </td>
+                    <td>
+                         <a href="@Url.Action("Edit", "PartiesManagement", new { id = item.Id })" class="icon-pencil"></a>
+                         <a href="javascript:void(0)" class="icon-trash delete"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+ <div class="dataTables_paginate paging_full_numbers" id="tSortable_2_paginate">
+        <span>
+        @for (int m = 1; m <= Model.NumberOfPages; m++)
+        {
+            if (m == Model.CurrentPage)
+            {
+                 <a href="javascript:void(0);" tabindex="0" class="paginate_active page-number-Current">@m</a>
+            }
+            else
+            {
+                    <a class="paginate_button page-number" href="javascript:void(0);" tabindex="0">@m</a>
+            }
+        }
+        </span>
+    </div>
+}
+else
+{
+    <table class="table dataTable" style="width:100%">
+        <thead>
+            <th>
+                Name
+            </th>            
+            <th>
+                OrderName
+            </th>
+            <th>
+                Assign By
+            </th>
+            <th style="width: 60px;">
+                Date Assign
+            </th>
+            <th width="10px">
+                Action
+            </th>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+}

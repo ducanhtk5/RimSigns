@@ -1,0 +1,470 @@
+﻿
+body {
+    background-image: url(/Content/img/remsigns/f4.jpg);
+    background-repeat: repeat-x;
+    margin-top: 0px;
+    background-color: #fff;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 15px;
+    color: #333;
+}
+
+a, a:visited {
+    text-decoration: none;
+    color: inherit;
+}
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+#wrappeer {
+    height: auto;
+    width: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#header {
+    height: 173px;
+    width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+#nav {
+    height: 56px;
+    width: auto;
+    color: #060;
+    z-index: 2;
+}
+
+
+
+#huge_slider {
+    width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+#small_slider {
+    width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 0px;
+    padding-left: 0px;
+}
+
+.tit-c1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 30px;
+    color: #666;
+    height: 45px;
+    width: auto;
+}
+
+
+
+.text-c1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 15px;
+    color: #333;
+    width: auto;
+}
+
+ #cerr1 .tit-c1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 30px;
+    color: #ddd;
+    height: 45px;
+    width: auto;
+}
+
+
+
+#cerr1 .text-c1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 15px;
+    color: #ddd;
+    width: auto;
+}
+
+
+
+
+
+#banda {
+    height: 77px;
+    width: auto;
+    margin-top: -3px;
+    background-color: #666666;
+}
+
+#contents {
+    
+    width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FFF;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+#imagenns {
+    height: 364px;
+    width: 120px;
+    float: left;
+}
+
+.ims {
+    float: left;
+    height: 118px;
+    width: 118px;
+    margin-bottom: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#textos_im {
+    float: right;
+    height: 364px;
+    width: 315px;
+}
+
+#conizq {
+    float: left;
+    height: 364px;
+    width: 450px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-left: 30px;
+    background-color: #FFF;
+}
+
+#conder {
+    float: right;
+    height: 364px;
+    width: 450px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-right: 30px;
+    background-color: #FFF;
+}
+
+#footer {
+    height: 234px;
+    width: 100%;
+    background-color: #81b73d;
+    float: left;
+}
+
+#galeria {
+    height: 180px;
+    width: 1000px;
+    margin-right: auto;
+    margin-left: auto;
+    float: left;
+}
+
+.t1 {
+    height: 80px;
+    width: auto;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    color: #333;
+}
+
+.t2 {
+    height: 110px;
+    width: auto;
+    margin-top: 15px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    color: #333;
+}
+
+.titus1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 18px;
+    color: #333;
+    height: 25px;
+}
+
+#cerrojo {
+    height: 200px;
+    width: 1050px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}
+
+#cerr1 {
+    float: left;
+    height: 150px;
+    width: 200px;
+
+}
+
+#cerr2 {
+    float: left;
+    height: 100px;
+    width: 625px;
+    margin-left: 60px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
+    margin-top: 0px;
+    padding-top: 50px;
+}
+
+#cerr3 {
+    float: right;
+    height: 150px;
+    width: 150px;
+}
+
+#tit_cerr1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 24px;
+    color: #FFF;
+}
+
+#text_cerr1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 12px;
+    color: #FFF;
+    height: 121px;
+    width: auto;
+    vertical-align: top;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+#col_center {
+    float: left;
+    height: 414px;
+    width: 300px;
+    margin-left: 25px;
+    background-color: #FFF;
+    margin-top: 15px;
+}
+
+
+
+#logo {
+    float: left;
+    height: 132px;
+    width: 246px;
+    margin-top: 16px;
+    margin-left: 20px;
+}
+
+#phrase {
+    float: left;
+    height: 70px;
+    width: 300px;
+    margin-top: 40px;
+    margin-left: 60px;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #FFF;
+    text-align: center;
+    padding-top: 0px;
+}
+
+#social {
+    float: right;
+    height: 103px;
+    width: 269px;
+    margin-top: 40px;
+    margin-right: 50px;
+}
+
+#socialic {
+    height: 40px;
+    width: auto;
+}
+
+
+
+#phonenum {
+    height: 40px;
+    width: auto;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #FFF;
+    text-align: right;
+}
+
+
+#tit-c1 {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 30px;
+    color: #666;
+    height: 45px;
+    width: auto;
+}
+
+.page_title {
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 30px;
+    color: #666;
+    height: 45px;
+    width: auto;
+    padding-left: 40px;
+    padding-top: 20px;
+}
+
+/* for Menu Navigation */
+.main_navi {
+    /*background-image: url(../images/navi_bg.jpg);*/
+    background-repeat: no-repeat;
+    width: 1000px;
+    height: 55px;
+    margin: 0 auto;
+}
+
+.navi_panel {
+    width: 1000px;
+    height: inherit;
+    margin: auto;
+}
+
+    .navi_panel ul {
+        /*width: 1022px;*/
+        height: inherit;
+        padding: 0px;
+        width: 100%;
+        margin: 0 auto;
+        text-decoration: none;
+        list-style: none;
+        font-family: "CORBELB_0";
+        font-size: 12px;
+        color: #FFFFFF;
+        overflow: hidden;
+    }
+
+        .navi_panel ul li {
+            float: left;
+            height: inherit;
+        }
+
+            .navi_panel ul li:hover > ul {
+                display: block;
+                opacity: 1;
+            }
+
+            .navi_panel ul li ul {
+                width: 240px;
+                margin: 37px 0 0 0;
+                display: none;
+                position: absolute;
+                z-index: 999;
+                background-color: #054B81;
+                height: auto;
+                -moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+                -webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+                -o-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+                -ms-box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+                box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+            }
+
+                .navi_panel ul li ul li {
+                    float: none;
+                    line-height: normal;
+                    border: none;
+                    border-bottom: 1px dashed #F97E05;
+                    background: #054B81;
+                    height: 34px;
+                    width: 240px;
+                    cursor: pointer;
+                }
+
+._arrow2_cls_li {
+    background-image: url(../images/_arrow2.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: 96% center !important;
+}
+
+    .navi_panel ul li ul li:hover, .navi_panel ul li ul li.hover, ._arrow2_cls_li:hover, ._arrow2_cls_li.hover {
+        background-color: #F97E05;
+        border-bottom: 1px dashed #767676;
+    }
+
+.navi_panel ul li ul li a {
+    padding: 0;
+    font-weight: normal;
+    margin: 0 0 0 20px;
+    line-height: 35px;
+    text-transform: capitalize;
+    color: #d1d1d1;
+}
+
+    .navi_panel ul li ul li a:hover, .navi_panel ul li ul li a.hover {
+        color: #fff;
+    }
+
+.navi_panel ul li a {
+    width: auto;
+    height: 35px;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Calibri',Arial;
+    font-size: 20px;
+    color: #FFFFFF;
+    float: left;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 20px;
+    line-height: 16px;
+    background: none;
+}
+
+
+    .navi_panel ul li a:hover {
+        background: #F97E05;
+    }
+
+.navi_panel .active {
+    width: auto; /*height:47px;*/
+    text-decoration: none;
+    list-style: none;
+    font-family: "CORBELB_0";
+    font-size: 12px;
+    color: #FFFFFF;
+    float: left;
+    text-align: center; /*padding-left:28px; 	padding-right:28px; 	padding-top:10px;*/
+    background-image: url(../images/navi_h.jpg);
+    background-repeat: repeat-x;
+}
+
+.navi_panel .navi_line {
+    background-repeat: no-repeat;
+    width: 1px;
+    height: 44px;
+    float: left;
+    padding: 0px;
+    margin: 0px;
+}
+
+/* end Menu navigation*/
+
+
+.clear {
+    clear: both;
+}
+
+/* Button boottrap */
+
+
+
+/* Button boot strap*/

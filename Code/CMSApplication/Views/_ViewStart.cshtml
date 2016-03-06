@@ -1,0 +1,11 @@
+﻿@{
+    if (CMS.Service.Helper.MobileHelper.isMobile(Request))
+    {
+        Layout = "~/Views/Shared/_Mobile_HomeLayout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+    }
+}

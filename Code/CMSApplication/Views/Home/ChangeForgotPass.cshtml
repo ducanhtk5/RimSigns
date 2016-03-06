@@ -1,0 +1,40 @@
+﻿@using CMS.Common.Helpers;
+@model CMSApplication.Models.UserModel
+@{
+    ViewBag.Title = "Change Password";
+}
+<div class="topic-content" style="padding: 15px 0 0 30px;">
+
+@using (Html.BeginForm("GetNewPass", "Home", FormMethod.Post, new { id = "getnewpassform" }))
+{  
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.Email)
+    <div class="gold-title" style="margin-bottom: 15px;">Change Password</div>    
+    <div class="row" style="margin-bottom: 15px;">
+        <div class="span2" style="margin-top: 5px;color: #fff;">New Password :</div>
+        <div class="span6">
+            @Html.PasswordFor(m => m.NewPassword, new { @class = "textfield txt_form_beauti_regis" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="span2" style="margin-top: 5px;color: #fff;">Confirm Password :</div>
+        <div class="span6">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "textfield txt_form_beauti_regis" })
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="span2"></div>
+        <div class="span6">
+           <input type="submit" value="Save" class="a_btn_g" style="padding:6px 10px 6px 10px;margin-right:10px;background-color:#bf9f62;" />
+             @Html.ActionLink("Cancel", "ProfileAccount", "Home", new { @class = "a_btn_g", @style = "padding:6px 10px 9px 10px;background-color:#bf9f62;" })
+        </div>
+    </div>
+ <br />
+    <div class="yellow_field">        
+    @ViewBag.ErrRequired <br />
+    @ViewBag.ErrNotlong <br />
+    @ViewBag.ErrNotmatch <br />
+    </div>      
+}
+</div> 

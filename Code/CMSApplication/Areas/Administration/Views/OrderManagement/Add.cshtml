@@ -1,0 +1,349 @@
+﻿@model CMSApplication.Areas.Administration.Models.OrderModels 
+@{ 
+    ViewBag.Title = "Add order management";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $("#e12").select2({
+            tags: [""]
+        });
+        /////// Description
+        CKEDITOR.replace('ckeditorId', {
+            filebrowserImageUploadUrl: '@Url.Action("UploadImage","Management")',
+            height: "300"
+        });
+
+        /////// Add Multiplte
+        var max_input = 11;
+        var now_input = 0;
+        jQuery("#addfile").click(function () {
+            now_input++;
+            if (now_input >= max_input)
+                return false;
+            //add file
+            var input = document.createElement("input");
+            input.type = "file";
+            input.name = "FileUp";
+
+            //---
+            jQuery('#upload_list').append(input);
+            jQuery('#upload_list').find("input:file").not(".skip").uniform();
+        });
+        //////////End 
+    });
+
+</script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Add new order</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("AddOrUpdate", "OrderManagement", FormMethod.Post, new { enctype = "multipart/form-data", @id = "validation" }))
+            {
+                        <div class="warning-area">
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.FileId)
+                        @Html.HiddenFor(model => model.FileName, new { @id = "" })
+                        @Html.HiddenFor(model => model.City)
+                        <div class="row-form">
+                            <div class="span2">
+                                Client:</div>
+                            <div class="span9">
+                               @Html.DropDownListFor(x => x.OrderById, Model.UsersSelectlist)</div>
+                               <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Title:</div>
+                            <div class="span9">
+                               @Html.TextBoxFor(x => x.Title, new { @class = "validate[required]" })</div>
+                               <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Address :</div>
+                            <div class="span7">
+                                @Html.TextBoxFor(x => x.Address, new { @class = "validate[required]" })
+                                @Html.HiddenFor(x => x.LatLng)
+                            </div>
+                            <div class="span3">
+                               <a id="btngetmap" class="t-button btn" href="#showdialog">Get map</a>
+                            </div>
+                                 <div class="clear"></div>
+                        </div>
+                
+                        <div class="row-form">
+                            <div class="span2">
+                                Quantity :</div>
+                            <div class="span9">
+                                <select name="Quantity">
+                                    @for(int i = 1; i<10; i++)
+                                    {
+                                    <option value="@i">@i</option>
+                                    }
+                                </select>
+
+                            </div>
+                                 <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Size :</div>
+                            <div class="span9">
+                                @Html.DropDownListFor(x => x.Size, Model.SizeSelectList, "Choose a size", new { @class = "validate[required]" })
+
+                            </div>
+                                 <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Type :</div>
+                            <div class="span9">
+                                @Html.DropDownListFor(x => x.Type, Model.TypeSelectList, "Choose a Type", new { @class = "validate[required]" })</div>
+                                 <div class="clear"></div>
+                        </div>
+                
+                        <div class="row-form">
+                            <div class="span2">
+                                Service Type :</div>
+                            <div class="span9">
+                                @Html.DropDownListFor(x => x.ServiceType, Model.ServiceTypeSelectlist, "Choose a Service Type")</div>
+                                 <div class="clear"></div>
+                        </div>
+
+                            <div class="row-form">
+                            <div class="span2">
+                                Banner size :</div>
+                            <div class="span9">
+                               @Html.TextBoxFor(c => c.BannerSize, new { placeholder = "height x width"})
+                                <span>Example: 4x12 feet</span>
+                            </div>
+                                 <div class="clear"></div>
+                        </div>@*
+                        <div class="row-form">
+                            <div class="span2">
+                                Status :</div>
+                            <div class="span9">
+                                @Html.DropDownListFor(x => x.Status, Model.StatusSelectList, "Choose a status")</div>
+                                 <div class="clear"></div>
+                        </div>*@
+                        <div class="row-form">
+                            <div class="span2">
+                                Link :</div>
+                            <div class="span9">
+                                @Html.TextBoxFor(x => x.Link)</div>
+                                 <div class="clear"></div>
+                        </div>
+                @*
+                        <div class="row-form">
+                            <div class="span2">
+                                Percent :</div>
+                            <div class="span9">
+                                @Html.DropDownListFor(x => x.OrderPercent, Model.PercentSelectList, "Choose a percent")</div>
+                                 <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Upload File :</div>
+                            <div class="span5" id="upload_list">
+                                <input type="file" multiple name="FileUp" />
+                                <a id="addfile" href="javascript:void(0)"><img src="/Areas/Administration/Content/img/add.png" alt="add file" /></a> 
+                            </div>
+                            <div class="clear"></div>                            
+                        </div>*@
+                 <div class="row-form">
+                            <div class="span2">
+                                Parties Email Address :</div>
+                            <div class="span9">
+                                @Html.TextBoxFor(x => x.Parties, new { @class = "validate[required]", id ="e12", @style= "width:500px" })</div>
+                                 <div class="clear"></div>
+                        </div>
+                
+                <div class="row-form">
+                            <div class="span2">
+                                Parties Information :</div>
+                            <div class="span9">
+                               @Html.TextAreaFor(c => c.PartiesInformation)
+                            </div>
+                                 <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                               Description</div>
+                            <div class="span9">
+                                @Html.TextAreaFor(x => x.Description, new { @cols = "10", @class = "validate[required]", @rows = "10", @id = "ckeditorId" })</div>
+                                 <div class="clear"></div>
+                        </div>
+                        <br />
+                    <div class="row-form">
+                            <div class="span2">
+                               </div>
+                            <div class="span9">
+                               <input type="submit" class="btn btn-info span3" value="Submit" /></div>
+                                <div class="clear"></div>
+                        </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="showdialog" style="display:none">
+<div id="dialog" title="Get Map" style="height:500px !important; width:820px !important;">
+<div  style="z-index:9;position:relative;top:10px;margin-left:200px;">
+
+<input type="text" value="" placeholder="Search Box" id="address_detail" class="ui-autocomplete-input ui-autocomplete-loading" autocomplete="off" style="width:340px;" role="textbox" aria-autocomplete="list" aria-haspopup="true"><br>
+<input type="button" value="Add Address" class="t-button" style="margin-left:120px;font-size: 12px;height: 24px;line-height: 8px;" onclick="_getMaps();" />
+</div>
+<div id="map_canvas" style="height:495px;width:820px;top:-60px"></div>
+</div>
+</div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDq7skUApJ5P6nmEtamguXV6neqigI4JLk&amp;sensor=false&amp;language=en"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script> 
+<script type="text/javascript">
+    var map;
+    var _latlng;
+    var openmap = 0;
+    var _address;
+    var _markerArr = []; var geocoder;
+    function initialize(val, _add) {
+        openmap++;
+        var _flat = false;
+        var _defaultLatLng = new google.maps.LatLng(31.287993235583038, -92.44133689116097);
+        if (val == undefined || val == 'undefined' || val == '') { } else {
+            var _arr = val.split(',');
+            _defaultLatLng = new google.maps.LatLng(_arr[0], _arr[1]);
+            _flat = true;
+        }
+        var mapOptions = {
+            zoom: 16,
+            center: _defaultLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        google.maps.event.addListener(map, 'click', function (e) {
+            placeMarker(e.latLng, map);
+        });
+        if (_flat == true) {
+            document.getElementById("address_detail").value = _add;
+            placeMarker(_defaultLatLng, map);
+        }
+    }
+    function placeMarker(position, map) {
+        ////// For Geo Code
+        getAddress(position);
+        ////// For Geo Code
+        for (var i = 0; i < _markerArr.length; i++) {
+            _markerArr[i].setMap(null);
+        }
+        _markerArr = [];
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+        _markerArr.push(marker);
+        map.panTo(position);
+        _latlng = position;
+    }
+    function getAddress(latLng) {
+        if (geocoder == null) {
+            geocoder = new google.maps.Geocoder();
+        }
+        geocoder.geocode({ 'latLng': latLng },
+        function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    document.getElementById("address_detail").value = results[0].formatted_address;
+                }
+                else {
+                    document.getElementById("address_detail").value = "No results";
+                }
+            }
+            else {
+                document.getElementById("address_detail").value = status;
+            }
+        });
+    }
+    function _getMaps() {
+        if (_latlng == undefined || _latlng == null || _latlng == '') {
+            alert('You need click to Map for choice Address !');
+        }
+        else {
+            var newLatLng = String(_latlng);
+            newLatLng = newLatLng.replace("(", "");
+            newLatLng = newLatLng.replace(")", "");
+            newLatLng = newLatLng.replace(" ", "");
+            document.getElementById("Address").value = document.getElementById("address_detail").value;
+            document.getElementById("LatLng").value = newLatLng;
+            jQuery.fancybox.close();
+            document.getElementById("Address").disabled = false;
+        }
+    }
+    $(document).ready(function () {
+        $("#btngetmap").fancybox({
+            afterLoad: function () {
+                var _LatLon1 = document.getElementById("LatLng").value;
+                var _add1 = document.getElementById("Address").value;
+                if (openmap == 0) {
+                    if (_LatLon1 == undefined || _LatLon1 == 'undefined' || _LatLon1 == '' || _LatLon1 == null) {
+                        initialize();
+                    }
+                    else {
+                        initialize(_LatLon1, _add1);
+                    }
+                }
+            }
+        });
+        jQuery(function () {
+            jQuery("#address_detail").autocomplete({
+                source: function (request, response) {
+                    if (geocoder == null) {
+                        geocoder = new google.maps.Geocoder();
+                    }
+                    geocoder.geocode({ 'address': request.term }, function (results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+
+                            var searchLoc = results[0].geometry.location;
+                            var lat = results[0].geometry.location.lat();
+                            var lng = results[0].geometry.location.lng();
+                            var latlng = new google.maps.LatLng(lat, lng);
+                            var bounds = results[0].geometry.bounds;
+
+                            geocoder.geocode({ 'latLng': latlng }, function (results1, status1) {
+                                if (status1 == google.maps.GeocoderStatus.OK) {
+                                    if (results1[1]) {
+                                        response(jQuery.map(results1, function (loc) {
+                                            return {
+                                                label: loc.formatted_address,
+                                                value: loc.formatted_address,
+                                                bounds: loc.geometry.bounds
+                                            }
+                                        }));
+                                    }
+                                }
+                            });
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    var pos = ui.item.position;
+                    var lct = ui.item.locType;
+                    var bounds = ui.item.bounds;
+                    if (bounds) {
+                        map.fitBounds(bounds);
+                    }
+                }
+            });
+        });
+    });
+
+
+</script>

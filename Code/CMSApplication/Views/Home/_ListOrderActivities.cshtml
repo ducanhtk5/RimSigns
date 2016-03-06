@@ -1,0 +1,15 @@
+﻿@model List<CMSApplication.Models.OrderActivitiesModels>
+
+@foreach (var item in Model)
+{
+    <div class="item">
+        <div class="image"><a href="#">
+            <img src="@Url.Content("~/Content/File/Remsigns/" + item.UserImage)" class="img-polaroid" /></a></div>
+        <div class="info">
+            <a href="#" class="name">@item.UpdateByUserName</a>
+            <p>@Html.Raw(item.Actions)</p>
+            <span>@item.CreatedTime</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+}

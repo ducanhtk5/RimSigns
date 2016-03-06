@@ -1,0 +1,16 @@
+﻿@using CMSApplication.Models
+@model TopicModel
+@if (Model != null)
+{
+    if (@Model.Title!="")
+    {
+    <h2 class="title">@Model.Title</h2>
+    <div class="topic_body">
+        @Html.Raw(Model.Body)
+    </div>
+    }
+    else{
+        @Html.Raw(Model.Body)    
+    }
+    
+}

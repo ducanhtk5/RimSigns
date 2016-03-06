@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Client Profile";
+    Layout = "~/Views/Shared/_ClientProfileLayout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-list"></div>
+            <h1>Dashboard</h1>
+            <div class="clear"></div>
+        </div>
+        <div class="block messages activeList">
+            @Html.Action("ListOrderActivities", "Home", new { page = 0})
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var is_finished = 0;
+        $(window).scroll(function () {
+            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+                if (is_finished == 0) {
+                    is_finished = 1;
+                    $(".loading-box").fadeIn("slow");
+                    var page = $(".activeList .item").length;
+                    jQuery.post("/Home/ListOrderActivities", {
+                        page: page
+                    },
+                    function (data) {
+                        if (data.length > 2) {
+                            jQuery(".activeList").append(data);
+                            is_finished = 0;
+                            $(".loading-box").fadeOut("slow");
+                        } else {
+                            $(".loading-box").fadeOut("slow");
+                            alert("No data to load.");
+                        }
+                    })
+                }
+            }
+        });
+    })
+    
+</script>
+
+

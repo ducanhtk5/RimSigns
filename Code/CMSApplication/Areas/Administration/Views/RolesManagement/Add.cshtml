@@ -1,0 +1,296 @@
+﻿@model CMSApplication.Areas.Administration.Models.RolesModel 
+@{ 
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        HttpMethod = "post",
+        OnComplete = "CompleteAjaxRequest"
+    };
+}
+<script type="text/javascript">
+
+    function CompleteAjaxRequest(obj) {
+
+        var returnObj = eval('(' + obj.responseText + ')');
+
+        if (returnObj.Status == "success") {
+            if (returnObj.Message != null) {
+                $.pnotify({
+                    title: 'Success',
+                    text: returnObj.Message,
+                    type: 'info',
+                    opacity: .8
+                });
+                $("form input:text").val('');
+                $("form input:password").val('');
+                $("form textarea").val('');
+            }
+            else if (returnObj.RedirectUrl != null) {
+                window.location.href = returnObj.RedirectUrl;
+            }
+        } else {
+            $.pnotify({
+                title: 'Error',
+                text: returnObj.Message,
+                type: 'error',
+                opacity: .8
+            });
+        }
+
+        return false;
+    };
+
+    $(document).ready(function () {
+        var valueRolesCustom = $("#Roles_persmission_ID").val();
+        if (valueRolesCustom == 7) {
+            $('#Roles_persmission_Add').attr('checked', 'checked');
+            $('#Roles_persmission_Edit').attr('checked', 'checked');
+            $('#Roles_persmission_Detele').attr('checked', 'checked');
+        }
+        else if (valueRolesCustom == 0) {
+            $('#Roles_persmission_Add').removeAttr('checked');
+            $('#Roles_persmission_Edit').removeAttr('checked');
+            $('#Roles_persmission_Detele').removeAttr('checked');
+        }
+        else if (valueRolesCustom == 1) {
+            $('#Roles_persmission_Add').attr('checked', 'checked');
+            $('#Roles_persmission_Edit').attr('checked', 'checked');
+            $('#Roles_persmission_Detele').removeAttr('checked');
+        }
+        else if (valueRolesCustom == 2) {
+            $('#Roles_persmission_Add').removeAttr('checked');
+            $('#Roles_persmission_Edit').attr('checked', 'checked');
+            $('#Roles_persmission_Detele').removeAttr('checked');
+        }
+        else if (valueRolesCustom == 3) {
+            $('#Roles_persmission_Add').removeAttr('checked');
+            $('#Roles_persmission_Edit').attr('checked', 'checked');
+            $('#Roles_persmission_Detele').attr('checked', 'checked');
+        }
+        else if (valueRolesCustom == 4) {
+            $('#Roles_persmission_Add').attr('checked', 'checked');
+            $('#Roles_persmission_Edit').removeAttr('checked');
+            $('#Roles_persmission_Detele').removeAttr('checked');
+        }
+        else if (valueRolesCustom == 5) {
+            $('#Roles_persmission_Add').attr('checked', 'checked');
+            $('#Roles_persmission_Edit').removeAttr('checked');
+            $('#Roles_persmission_Detele').attr('checked', 'checked');
+        }
+        else if (valueRolesCustom == 6) {
+            $('#Roles_persmission_Add').attr('checked', 'checked');
+            $('#Roles_persmission_Edit').attr('checked', 'checked');
+            $('#Roles_persmission_Detele').removeAttr('checked');
+        }
+
+    });
+
+    function handleChange(type, cb, code) {
+        if (type == "Roles") {
+            var valueRoles = $("#Roles_persmission_ID").val();
+            if (code == "add") {
+                if (cb.checked == false) {
+                    valueRoles -= 4;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+                else {
+                    valueRoles = parseInt(valueRoles) + 4;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+            }
+            else if (code == "edit") {
+                if (cb.checked == false) {
+                    valueRoles -= 2;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+                else {
+                    valueRoles = parseInt(valueRoles) + 2;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+            }
+            else if (code == "delete") {
+                if (cb.checked == false) {
+                    valueRoles -= 1;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+                else {
+                    valueRoles = parseInt(valueRoles) + 1;
+                    $("#Roles_persmission_ID").val(valueRoles);
+                }
+            }
+        } else if (type == "Users") {
+            var valueUsers = $("#user_persission_ID").val();
+            if (code == "add") {
+                if (cb.checked == false) {
+                    valueUsers -= 4;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+                else {
+                    valueUsers = parseInt(valueUsers) + 4;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+            }
+            else if (code == "edit") {
+                if (cb.checked == false) {
+                    valueUsers -= 2;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+                else {
+                    valueUsers = parseInt(valueUsers) + 2;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+            }
+            else if (code == "delete") {
+                if (cb.checked == false) {
+                    valueUsers -= 1;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+                else {
+                    valueUsers = parseInt(valueUsers) + 1;
+                    $("#user_persission_ID").val(valueUsers);
+                }
+            }
+        } else if (type == "Course") {
+            var valueCourse = $("#course_persmission_ID").val();
+            if (code == "add") {
+                if (cb.checked == false) {
+                    valueCourse -= 4;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+                else {
+                    valueCourse = parseInt(valueCourse) + 4;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+            }
+            else if (code == "edit") {
+                if (cb.checked == false) {
+                    valueCourse -= 2;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+                else {
+                    valueCourse = parseInt(valueCourse) + 2;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+            }
+            else if (code == "delete") {
+                if (cb.checked == false) {
+                    valueCourse -= 1;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+                else {
+                    valueCourse = parseInt(valueCourse) + 1;
+                    $("#course_persmission_ID").val(valueCourse);
+                }
+            }
+        } else if (type == "Exams") {
+            var valueExams = $("#exam_persmission_ID").val();
+            if (code == "add") {
+                if (cb.checked == false) {
+                    valueExams -= 4;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+                else {
+                    valueExams = parseInt(valueExams) + 4;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+            }
+            else if (code == "edit") {
+                if (cb.checked == false) {
+                    valueExams -= 2;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+                else {
+                    valueExams = parseInt(valueExams) + 2;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+            }
+            else if (code == "delete") {
+                if (cb.checked == false) {
+                    valueExams -= 1;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+                else {
+                    valueExams = parseInt(valueExams) + 1;
+                    $("#exam_persmission_ID").val(valueExams);
+                }
+            }
+        } else if (type == "Questions") {
+            var valueQuestions = $("#question_persmssion_ID").val();
+            if (code == "add") {
+                if (cb.checked == false) {
+                    valueQuestions -= 4;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+                else {
+                    valueQuestions = parseInt(valueQuestions) + 4;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+            }
+            else if (code == "edit") {
+                if (cb.checked == false) {
+                    valueQuestions -= 2;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+                else {
+                    valueQuestions = parseInt(valueQuestions) + 2;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+            }
+            else if (code == "delete") {
+                if (cb.checked == false) {
+                    valueQuestions -= 1;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+                else {
+                    valueQuestions = parseInt(valueQuestions) + 1;
+                    $("#question_persmssion_ID").val(valueQuestions);
+                }
+            }
+        }
+    }
+
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Add roles</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Ajax.BeginForm("AddOrUpdate", "RolesManagement", null, ajaxOpts, new { enctype = "multipart/form-data",@id="validation" }))
+    {
+            <div class="warning-area">
+            </div>
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.checkAddOrUdate)
+            @Html.HiddenFor(model => model.systemnameOld)
+            @Html.HiddenFor(model => model.DateCreate)
+            @Html.HiddenFor(model => model.Roles_persmission, new { id = "Roles_persmission_ID" })
+            <div class="row-form">
+                <div class="span2">
+                    Roles Name</div>
+                <div class="span5">
+                    @Html.TextBoxFor(x => x.Name, new { @class = "validate[required]" })</div>
+                    <div class="clear"></div>
+            </div>
+            <div class="row-form">
+                <div class="span2">
+                    Active</div>
+                <div class="span5">
+                    @Html.EditorFor(x => x.Active)</div>
+                     <div class="clear"></div>
+            </div>
+            <div class="row-form">
+                <div class="span2">
+                </div>
+                <div class="span5"><br />
+                    <input type="submit" class="btn" value="Submit" /></div>
+                     <div class="clear"></div>
+            </div>
+    }
+        </div>
+    </div>
+</div>

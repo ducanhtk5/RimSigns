@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Images Management";
+}
+
+
+
+<a class="btn AddNews" data-dialog-id="addCate" data-dialog-title="Add New Images"
+                    href="/Administration/GalleryManager/AddGallery"><span>Add Image</span></a>
+
+@Html.DropDownList("CatalogID",null, new { onchange = "ChangeCode()"})
+
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Images Management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid listRolesName listItemroles">
+        @Html.Action("ListGallery", "GalleryManager", new { page=1,catalogid=0})
+    </div>
+</div>
+
+
+

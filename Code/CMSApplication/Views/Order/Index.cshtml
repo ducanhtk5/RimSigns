@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Orders Management";
+    Layout = "~/Views/Shared/_ClientProfileLayout.cshtml";
+}
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-grid">
+            </div>
+            <h1>
+                Search</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            <div class="row-form">
+                <div class="span4">
+                    <input id="order-search-key" style="float: right; margin-right: 10px; width: 100%"
+                        type="text" name="keys" placeholder="Search by title, status, type..." />
+                </div>
+                <div class="span4">
+                    <input type="text" style="float: right; margin-right: 10px" id="sort-from-date" name="day_from"
+                        placeholder="Search from day..." />
+                </div>
+                <div class="span4">
+                    <input type="text" style="float: right; margin-right: 10px" id="sort-to-date" name="day_to"
+                        placeholder="to..." />
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="dr">
+    <span></span>
+</div>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Orders management</h1>
+    <ul class="buttons">
+        <li><a href="@Url.Action("Add", "Order")" class="isw-plus" title="Add new order"></a>
+        </li>
+    </ul>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid list">
+        @Html.Action("List", "Order", new { page = 1 })
+    </div>
+</div>
+<script type="text/javascript">
+    (function ($) {
+        $("#sort-to-date").datepicker();
+        $("#sort-from-date").datepicker();
+        $("#sort-to-date").change(function () {
+            if ($("#sort-from-date").val() != "") {
+                SortByDay();
+            }
+        })
+
+        $("#sort-from-date").change(function () {
+            if ($("#sort-to-date").val() != "") {
+                SortByDay();
+            }
+        })
+
+        function SortByDay() {
+            $.post("/Order/SortByDay", {
+                day_to: $("#sort-to-date").val(),
+                day_from: $("#sort-from-date").val(),
+            }, function (data) {
+                $(".list").html(data);
+            })
+        }
+
+        $("#order-search-key").keyup(function (e) {
+            if (e.keyCode == 13) {
+                $.post("/Order/FullSearch", {
+                    keys: $("#order-search-key").val()
+                }, function (data) {
+                    $(".list").html(data);
+                })
+            }
+        })
+    })(jQuery)
+
+</script>

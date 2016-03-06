@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Registration Successful - Real Estate Media</title>
+    <link href="@Url.Content("~/Content/css/stylesheets.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/css/login.css")" rel="stylesheet" type="text/css" />
+    <script src="../../Content/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="registerBox">
+        <div class="registerHead">
+            <img src="@Url.Content("~/Content/img/logo_2.png")" />
+        </div>
+            <div class="control-group">
+                <p>@ViewBag.Message</p>
+            </div>
+            <div class="form-actions">
+                <a href="@Url.Action("Index", "Home")" class="btn">Back to Homepage</a>
+            </div>
+    </div>
+</body>
+</html>

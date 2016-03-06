@@ -1,0 +1,51 @@
+﻿@using CMS.Common.Helpers;
+@model CMSApplication.Areas.Administration.Models.LogOnModel
+@{
+    ViewBag.Title = "Log On";
+    Layout = null;
+    string returnUrlstring=string.Empty;
+    if (!string.IsNullOrEmpty(Request.QueryString["returnUrl"]))
+    {
+        returnUrlstring = Request.QueryString["returnUrl"].ToString();
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Administration - Control Panel</title>
+    <link href="@Url.ContentArea("~/Content/css/stylesheets.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="loginBox">
+        <div class="loginHead">
+            <img src="@Url.ContentArea("~/Content/img/logo_2.png")" alt="Aquarius -  responsive admin panel" title="Aquarius -  responsive admin panel"/>
+            
+        </div>
+        @using (Html.BeginForm("Logon", "Management", FormMethod.Post, new { @class = "form-horizontal" }))
+        {   
+            <input type="hidden" name="returnUrl" value="@returnUrlstring" />
+            <div class="control-group">
+                <label for="inputEmail">
+                    User name</label>
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "UserName", @class = "inputEmail" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Password</label>
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "inputPassword" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="control-group" style="margin-bottom: 5px;">
+                <label>@Html.CheckBoxFor(m => m.RememberMe) Remember me</label>
+            </div>
+            <div class="form-actions">
+            <input type="submit" value="Sign in" class="btn" />
+            </div>
+            
+        }
+    </div>
+</body>
+</html>

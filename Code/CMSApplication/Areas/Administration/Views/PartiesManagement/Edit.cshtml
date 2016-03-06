@@ -1,0 +1,67 @@
+﻿@model CMSApplication.Areas.Administration.Models.PartiesModels 
+@{ 
+    ViewBag.Title = "Edit parties management";
+}
+<script type="text/javascript">
+    function ChangeUserNameDropdown() {
+        $('#_userid_dd').val($("#UserNameID").val());
+    }
+    function ChangeOrderNameDropdown() {
+        $('#_orderid_dd').val($("#OrderNameID").val());
+    }
+    $(document).ready(function () {
+        $("#UserNameID").val($('#_userid_dd').val());
+        $("#OrderNameID").val($('#_orderid_dd').val());
+    });
+
+</script>
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Edit parties</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("AddOrUpdate", "PartiesManagement"))
+                {
+                        <div class="warning-area">
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.AssignById)
+                        @Html.HiddenFor(model => model.AssignByName)
+                        @Html.HiddenFor(model => model.DateAssign)
+                        @Html.HiddenFor(model => model.UserId, new { @id = "_userid_dd" })
+                        @Html.HiddenFor(model => model.OrderId, new { @id = "_orderid_dd" })
+                        <div class="row-form">
+                            <div class="span2">
+                                Name:</div>
+                            <div class="span9">
+                                @Html.DropDownList("UserNameID", null, "-- Choose --", new { @class = "validate[required]", @style = "width: 300px;", onchange = "ChangeUserNameDropdown()" })
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="row-form">
+                            <div class="span2">
+                                Order Name :</div>
+                            <div class="span9">
+                                @Html.DropDownList("OrderNameID", null, "-- Choose --", new { @class = "validate[required]", @style = "width: 300px;", onchange = "ChangeOrderNameDropdown()" })
+                           </div>
+                           <div class="clear"></div>
+                        </div>
+                        <br />
+                    <div class="row-form">
+                            <div class="span2">
+                               </div>
+                            <div class="span9">
+                               <input type="submit" class="btn" value="Submit" /></div>
+                                <div class="clear"></div>
+                        </div>
+                }
+        </div>
+    </div>
+</div>

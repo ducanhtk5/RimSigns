@@ -1,0 +1,165 @@
+﻿@model CMS.Common.Helpers.PagedData<CMSApplication.Areas.Administration.Models.UserModel>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".page-number").live("click", function () {
+            var RolesID = $("#RolesID").val();
+            var page = parseInt($(this).html());
+            $.get("/Administration/UserManagement/List?rolesId=" + RolesID + "&page=" + page, function (data) {
+                $(".listuser").html("");
+                $(".listuser").html(data);
+            });
+        });
+
+
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var NameItem = $this.closest('tr').find('.spanName').html();
+            if (confirm("Are you sure delete Roles : " + NameItem + "")) {
+                var IdItem = $this.closest('tr').find('.Spanid').html();
+                var RolesID = $("#RolesID").val();
+                $.get("/Administration/UserManagement/deleteUser?id=" + IdItem, function () {
+                    var page = parseInt($(".page-number-Current").html());
+                    $.get("/Administration/UserManagement/List?rolesId=" + RolesID + "&page=" + page, function (data) {
+                        $(".listuser").html("");
+                        $(".listuser").html(data);
+                    });
+                });
+            }
+        });
+
+    });
+
+</script>
+@if (Model.Data.Count() > 0)
+{
+    <table class="table dataTable" style="width: 100%">
+        <thead>
+            <th>
+                Company Name
+            </th>
+            <th>
+                Contact Name
+            </th>
+            <th>
+                Email
+            </th>
+            
+            <th>
+                User Name
+            </th>
+
+            <th>
+                Role
+            </th>
+            <th>
+                Active
+            </th>
+            <th>
+                Date Create
+            </th>
+            <th width="100px">
+                Action
+            </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Data)
+            {
+                <tr user-mail="@item.Email">
+                    <td>
+                        <span>@item.CompanyName</span>
+                    </td>
+                     <td>
+                        <span >@item.FullName </span>
+                    </td>
+                    <td>
+                        <span class="Spanid" style="display: none;">@item.Id</span> <span class="spanName">@item.Email
+                        </span>
+                    </td>
+                   
+                    <td>
+                        <span >@item.UserName </span>
+                    </td>
+                    <td>
+                        <span >@item.RoleName </span>
+                    </td>
+                    <td>
+                        <span >@Html.CheckBox("Acitve", item.Status, new { disabled="disabled"}) </span>
+                    </td>
+                    <td>
+                        <span >@string.Format("{0:MM/dd/yyyy}", item.DataCreate) </span>
+                    </td>
+                    <td>
+                     <a href="@Url.Action("Edit", "UserManagement", new { id = item.Id })" class="icon-pencil" title="Edit this user"></a>
+                         <a href="javascript:void(0)" class="icon-trash delete" title="Delete this user"></a>
+                        <a href="@Url.Action("Add", "OrderManagement", new { userId = item.Id})" class="icon-plus-sign" title="Add new order"></a>
+                        <a href="@Url.Action("Index", "OrderManagement", new { userId = item.Id})" class="icon-eye-open" title="View all orders"></a>
+                        <a href="javascript:void(0)" class="icon-envelope popup_4" title="Send an Email"></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="dataTables_paginate paging_full_numbers" id="tSortable_2_paginate">
+        <span>
+        @for (int m = 1; m <= Model.NumberOfPages; m++)
+        {
+            if (m == Model.CurrentPage)
+            {
+                 <a href="javascript:void(0);" tabindex="0" class="paginate_active page-number-Current">@m</a>
+            }
+            else
+            {
+                    <a class="paginate_button page-number" href="javascript:void(0);" tabindex="0">@m</a>
+            }
+        }
+        </span>
+    </div>
+}
+else
+{
+    <h2>
+        Have not any user in roles
+    </h2>
+}
+
+
+<div class="dialog" id="b_popup_4" style="display: none;" title="Send Email To">    
+     @using (Html.BeginForm("SendEmail", "UserManagement", FormMethod.Post, new { @id = "form-upload", enctype = "multipart/form-data" }))
+     {                            
+        <div class="block">
+            <p>   
+                <input type="text" name="email" id="email-input" readonly="true"/>                 
+            </p>
+            <p>   
+                <input type="text" name="subject" placeholder="Subject"/>                 
+            </p>
+            <p>   
+                <textarea rows="3" name="body"></textarea>              
+            </p>
+        </div>
+        }
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#b_popup_4").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 400,
+            buttons: {
+                "Ok": function () {
+                    $("#form-upload").submit();
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $(".popup_4").click(function () {
+            $("#email-input").val($(this).parents("tr").attr("user-mail"));
+            $("#b_popup_4").dialog('open')
+        });
+    })
+
+</script>

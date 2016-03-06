@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model CMSApplication.Models.RegisterModel
+<link href="@Url.Content("~/Content/css/login.css")" rel="stylesheet" type="text/css" />
+<div id="contents2">
+    <div class="page_title">
+        Register
+    </div>
+    @using (Html.BeginForm("Register", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="registerBox">
+            <br />
+            <div class="control-group">
+                <label for="inputEmail">
+                    Company</label>
+                @Html.TextBoxFor(model => Model.CompanyName, new { @class = "inputAddress" })
+                @Html.ValidationMessageFor(model => model.CompanyName)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Full name</label>
+                @Html.TextBoxFor(m => m.FullName, new { @placeholder = "Full name", @class = "inputFullName" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Email</label>
+                @Html.TextBoxFor(m => m.Email, new { @placeholder = "Emai", @class = "inputEmail" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    User name</label>
+                @Html.TextBoxFor(m => m.UserName, new { @placeholder = "UserName", @class = "inputUserName" })
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Password</label>
+                @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "inputPassword" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Re-Password</label>
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Password", @class = "inputConfirmPassword" })
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Address</label>
+                @Html.TextBoxFor(model => Model.Address, new { @class = "inputAddress" })
+                @Html.ValidationMessageFor(model => model.Address)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Phone</label>
+                @Html.TextBoxFor(model => Model.Phone, new { @class = "inputAddress" })
+                @Html.ValidationMessageFor(model => model.Phone)
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Company Logo</label>
+                <input type="file" name="FileUp" />
+            </div>
+            <div class="control-group">
+                <label for="inputEmail">
+                    Description</label>
+                @Html.TextAreaFor(model => Model.Description, new { @style = "width:95%; height:100px", @class = "inputDes" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="control-group">
+                @Html.Raw(Html.GenerateCaptcha())
+            </div>
+            <div class="control-group" style="margin-bottom: 5px;">
+                <label>
+                    <span style="color: red" class="error-msg">@ViewBag.Message</span></label>
+            </div>
+            <div class="form-actions">
+                <input type="submit" value="Sign up" class="btn submit-btn" />
+                <input type="button" value="Cancel" class="btn" />
+            </div>
+        </div>           
+    }
+</div>

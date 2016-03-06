@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Setting Manager";
+}
+
+<a class="btn" href="/Administration/Setting/Addsetting"><span>Add new setting</span></a>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Setting Management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid">
+    <div class="listRolesName list">
+        @Html.Action("ListSetting", "Setting", null)
+    </div>
+</div>

@@ -1,0 +1,509 @@
+﻿@charset "utf-8";
+
+
+
+#contents2 {
+
+	width: 1050px;
+
+	margin-right: auto;
+
+	margin-left: auto;
+
+	background-color: #FFF;
+
+}
+
+
+    #contents2 table input {
+   
+    }
+
+
+
+    #contents2 table span {
+        font-size:11px;
+    }
+
+#imagenns2 {
+
+	height: 364px;
+
+	width: 120px;
+
+	float: left;
+
+}
+
+.ims2 {
+
+	float: left;
+
+	height: 118px;
+
+	width: 118px;
+
+	margin-bottom: 5px;
+
+	text-align: center;
+
+	vertical-align: middle;
+
+}
+
+#textos_im2 {
+
+	float: right;
+
+	height: 364px;
+
+	width: 315px;
+
+}
+
+
+
+#conizq2 {
+
+	float: left;
+
+	height: 364px;
+
+	width: 300px;
+
+	padding: 10px;
+
+	margin-top: 15px;
+
+	margin-left: 30px;
+
+	background-color: #FFF;
+
+}
+
+
+
+#concen2 {
+
+	
+
+	height: 364px;
+
+	width: 300px;
+
+	padding: 10px;
+
+	margin-top: 15px;
+
+	margin-left: 30px;
+
+	margin-right: 30px;
+
+	background-color: #FFF;
+
+}
+
+
+
+
+
+
+
+#conder2 {
+
+	float: right;
+
+	padding: 10px;
+
+	margin-top: 15px;
+
+	margin-bottom: 15px;
+
+	margin-right: 30px;
+
+}
+
+
+
+.contact_panel{
+
+	width:287px;
+
+	height:auto;
+
+	margin-bottom:5px;
+
+}
+
+
+
+.contact_top{
+
+	background-image:url(../../Content/images/contact_top.jpg);
+
+	background-repeat:no-repeat;
+
+	width:287px;
+
+	height:12px;
+
+}
+
+
+
+.contact_mid{
+
+	background-color: #81B73D;
+background-repeat: repeat-x;
+width: 261px;
+height: 380px;
+padding-left: 25px;
+padding-right: 20px;
+margin-top: -8px;
+margin-bottom: -20px;
+padding-top: 20px;
+}
+
+
+
+.contact_bottom{
+
+	background-image:url(../../Content/images/contact_bottom.jpg);
+
+	background-repeat:no-repeat;
+
+	width:287px;
+
+	height:16px;
+
+}
+
+
+
+.contact_title{
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:20px;
+
+	color:#FFFFFF;
+
+	margin-bottom:5px;
+
+}
+
+
+
+.contact_text{
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:12px;
+
+	color:#FFF;
+
+	font-weight:bold;
+
+	margin-bottom:10px;
+
+}
+
+
+
+
+
+.contact_text2{
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	color:#ab0000;
+
+	font-weight:bold;
+
+	margin-bottom:10px;
+
+}
+
+
+
+.text_field{
+
+	width:245px;
+
+	height:21px;
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	color:#8e8e8e;
+
+	padding-left:10px;
+
+	padding-top:2px;
+
+	margin-bottom:7px;
+
+	background-image:url(../../Content/images/field_bg.png);
+
+	background-repeat:no-repeat;
+
+	border:none;
+
+}
+
+
+
+.text_area{
+
+	width:245px;
+
+	height:106px;
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	color:#8e8e8e;
+
+	padding-left:10px;
+
+	padding-top:2px;
+
+	margin-bottom:7px;
+
+	text-align:top;
+
+	background-image:url(../../Content/images/area_bg.png);
+
+	background-repeat:no-repeat;
+
+	border:none;
+
+}
+
+
+
+.capcha{
+
+	width:150px;
+
+	height:47px;
+
+	margin-bottom:12px;
+
+	margin-top:10px;
+
+	margin:auto;
+
+}
+
+
+
+.pass_field_panel{
+
+	width:245px;
+
+	height:24px;
+
+	margin-top:10px;
+
+}
+
+
+
+.pass_field{
+
+	width:165px;
+
+	height:21px;
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	color:#8e8e8e;
+
+	padding-left:10px;
+
+	padding-top:2px;
+
+	margin-bottom:7px;
+
+	background-image:url(../../Content/images/pass_filed.png);
+
+	background-repeat:no-repeat;
+
+	border:none;
+
+	float:left;
+
+}
+
+
+
+.submit_btn a{
+
+	background-image:url(../../Content/images/submit_btn.png);
+
+	background-repeat:no-repeat;
+
+	width:65px;
+
+	height:22px;
+
+	text-align:center;
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	font-weight:bold;
+
+	color:#FFFFFF;
+
+	display:block;
+
+	text-decoration:none;
+
+	padding-top:6px;
+
+	float:left;
+
+	margin-left:3px;
+
+}
+
+.submit_btn a:hover{
+
+	background-image:url(../../Content/images/submit_btn_h.png);
+
+	background-repeat:no-repeat;
+
+	width:65px;
+
+	height:22px;
+
+	text-align:center;
+
+	font-family:Arial, Helvetica, sans-serif;
+
+	font-size:11px;
+
+	font-weight:bold;
+
+	color:#FFFFFF;
+
+	display:block;
+
+	text-decoration:none;
+
+	padding-top:6px;
+
+	float:left;
+
+	margin-left:3px;
+
+}/* CSS Document */
+
+
+
+ .gallery
+{
+    margin: 5px;
+    float: left;
+    width: 176px;
+}
+.gallery_box
+{
+    background: transparent url(../../../Content/img/remsigns/bosuutap.png) no-repeat scroll left top;
+    width: 154px;
+    height: 125px;
+    padding-left: 20px;
+    padding-top: 13px;
+    padding-right: 15px;
+    padding-bottom: 6px;
+}
+.gallery_info
+{
+    margin-top: 5px;
+    margin-left: 8px;
+    color:#000000;
+}
+.gallery_info span
+{
+    font-weight: bold;
+    font-size: 22px;
+}
+._gallery_info_right
+{
+    float:right;
+    color: #BBB;
+    line-height: 33px;
+    margin-right:20px;    
+}
+._ul_catalog_img
+{
+    list-style:none;
+    width: 95%;
+    height: auto;
+}
+._ul_catalog_img li
+{
+    float: left;
+    margin-bottom: 15px;
+}
+._ul_gallery
+{
+    list-style:none;
+    float: left;
+}
+._ul_gallery li
+{
+    float: left;
+    margin: 0 15px 15px 0;
+    min-height: 130px;
+}
+._ul_gallery a
+{
+    text-decoration:none;
+}
+._ul_gallery a:hover,._ul_gallery a.hover
+{
+    text-decoration:none;
+}
+.img_gallery
+{
+    -moz-box-shadow: 0px 0px 5px #000;
+    -webkit-box-shadow: 0px 0px 5px #000;
+    -o-box-shadow: 0px 0px 5px #000;
+    -ms-box-shadow: 0px 0px 5px #000;
+    box-shadow: 0px 0px 5px #000;
+    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+}
+._gallery_title_box
+{
+    float:left;
+    clear:both;    
+    width:100%;
+    padding: 20px 0 50px 35px;
+}
+
+
+
+#footer a, #footer:visited, #footer:hover
+{
+    color: #FFFFFF;
+}
+
+#footer a:hover
+{
+    text-decoration: underline;
+}

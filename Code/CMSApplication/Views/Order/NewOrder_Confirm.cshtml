@@ -1,0 +1,29 @@
+﻿@{
+    string Name = ViewData["name"].ToString();
+}
+@using CMSApplication.Models
+@using CMS.Service.Common
+@model CMSApplication.Models.OrderModels
+                      
+Hi @Name<br />
+On @DateTime.Now.ToString("MM/dd/yy H:mm:ss") Real Estate Media received your order.<br />
+<br />
+We would like to let you know that your order has been received and processed. <br />
+Here is confirmation of your order detail : <br /><br />
+Project Name: @Model.Title<br />
+Address: @Model.Address<br />
+Size: @Model.Size<br />
+Type: @Model.Type<br />
+Service Type: @Model.ServiceType<br />
+Banner Size: @Model.BannerSize<br />
+Quantity: @Model.Quantity<br />
+Parties Email Address: @Model.Parties<br />
+Parties Information: @Html.Raw(@Model.PartiesInformation)<br />
+Description: @Html.Raw(@Model.Description)<br />
+
+<br /><br />
+You can  login into Real Estate Media website using your account and review your order progress. 
+<br />
+Thank You
+<br />
+Brian - Real Estate Media- 972.567.0044

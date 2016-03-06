@@ -1,0 +1,13 @@
+﻿@using CMSApplication.Models
+@model UserModel
+@{
+    ViewBag.Title = "Active succesful";
+}
+
+<div class="topic-content">
+    <script language="javascript">
+        alert("Congratulations! Your account @Model.Email has been actived.");
+        window.location.href = "/";
+</script>
+</div>
+

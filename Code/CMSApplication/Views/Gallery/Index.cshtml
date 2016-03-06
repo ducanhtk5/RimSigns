@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Gallery - advertising signs | commercial sign| business yard sign";
+    ViewBag.Keywords = "business yard sign, yard sign for business, yard sign cheap, yard sign creator, outdoor company signs, advertising signs Dallas commercial signs Carrollton";
+    ViewBag.Description = "Real Estate Media Provide a company that our customers enjoyed doing business and present good jobs for good people.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model List<CMSApplication.Areas.Administration.Models.CatalogGalleryModel>
+
+<div id="contents" style="padding-bottom: 100px;">
+    <div class="page_title">
+        GALLERY
+    </div>
+    <div style="padding: 20px 40px 40px 40px; display: block; font-family: Tahoma, Geneva, sans-serif; font-size:12px">
+
+    <ul class="_ul_catalog_img">
+        @foreach(var item in Model)
+        {
+        <li>
+        <a href="/Gallery/GalleryDetails/@item.CatalogID" title="@item.Name">
+            <div class="gallery_box">
+              <img class="tonus" src="@Url.Content("~/Content/File/Remsigns/" + item.Image)" alt="" width="140px" height="119px" style="height: 119px;width:140px;">
+            </div>
+        </a>
+            <div class="gallery_info">
+                <div style="float:left;"><span>@item.CountImg </span> Image</div>
+                <div class="_gallery_info_right">@item.Name</div>
+            </div>
+        </li>
+        }
+        </ul>
+    </div>
+    <div class="clear"></div>
+</div>
+
+

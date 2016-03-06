@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<a class="btn" href="/Administration/Slide/Add"><span>Add new image</span></a>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Slide manager</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid">
+    <div class="listRolesName list">
+        @Html.Action("ListSlide", "Slide", null)
+    </div>
+</div>

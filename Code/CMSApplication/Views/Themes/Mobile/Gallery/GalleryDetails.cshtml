@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = ViewBag.CatalogTitle + " " + ViewBag.CatalogMetaTitle;
+    ViewBag.Keywords = ViewBag.CatalogMetaDesc;
+    ViewBag.Description = ViewBag.CatalogMetaKeywords;
+}
+
+@model List<CMSApplication.Areas.Administration.Models.GalleryModel>
+<div data-role="header" data-position="fixed">
+    <h1>GALLERY - @ViewBag.CatalogTitle</h1>
+    <a href="#sideNav" id="navIcon"><i class="icon-th-list"></i></a>
+</div>
+
+<div data-role="content">
+    <div id="contents" style="padding-bottom: 100px;">
+        @if (Model.Count > 0)
+        {
+            <ul class="thumbnails mws-gallery">
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <span class="thumbnail">
+                            <a href="@Url.Content("~/Content/File/Remsigns/" + item.Image)" class="fancybox-thumbs" title="@item.Name">
+                                <img class="tonus" src="@Url.Content("~/Content/File/Remsigns/" + item.Image)" />
+                            </a>
+                        </span>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <span>No images.</span>
+        }
+        <div class="clear"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.fancybox-thumbs').fancybox();
+    });
+</script>

@@ -1,0 +1,11 @@
+﻿@using CMSApplication.Areas.Administration.Models
+@model   IEnumerable<SlideModel>
+@if (Model.Count() > 0)
+{
+    foreach (var item in Model)
+    {
+    <span>
+        <img src="@Url.Content("~/Content/File/ImagesUpload"+item.Images)" alt="@item.Title" title="@item.Title"
+                            id="wows-@item.Id" /></span> 
+    }
+}

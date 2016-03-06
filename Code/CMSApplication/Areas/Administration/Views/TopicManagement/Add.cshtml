@@ -1,0 +1,127 @@
+﻿@model CMSApplication.Areas.Administration.Models.TopicModel 
+@{ 
+    ViewBag.Title = "Add topic management";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        HttpMethod = "post",
+        OnComplete = "CompleteAjaxRequest"
+    };
+}
+<script type="text/javascript">
+
+    function CompleteAjaxRequest(obj) {
+
+        var returnObj = eval('(' + obj.responseText + ')');
+
+        if (returnObj.Status == "success") {
+            if (returnObj.Message != null) {
+                $.pnotify({
+                    title: 'Success',
+                    text: returnObj.Message,
+                    type: 'info',
+                    opacity: .8
+                });
+                $("form input:text").val('');
+                $("form input:password").val('');
+                $("form textarea").val('');
+            }
+            else if (returnObj.RedirectUrl != null) {
+                window.location.href = returnObj.RedirectUrl;
+            }
+        } else {
+            $.pnotify({
+                title: 'Error',
+                text: returnObj.Message,
+                type: 'error',
+                opacity: .8
+            });
+        }
+
+        return false;
+    };
+
+    $(document).ready(function () {
+        CKEDITOR.replace('ckeditorId', {
+            filebrowserImageUploadUrl: '@Url.Action("UploadImage", "Management")',
+            height: "300"
+        });
+    });
+
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+                Add new topic</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Ajax.BeginForm("AddOrUpdate", "TopicManagement", null, ajaxOpts, new { enctype = "multipart/form-data", @id = "validation" }))
+            {
+                <div class="warning-area">
+                </div>
+                @Html.HiddenFor(model => model.Id)
+                <div class="row-form">
+                    <div class="span2">
+                        Title:</div>
+                    <div class="span9">
+                        @Html.TextBoxFor(x => x.Title, new { @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        System name :</div>
+                    <div class="span9">
+                        @Html.TextBoxFor(x => x.SystemName, new { @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Topic content</div>
+                    <div class="span9">
+                        @Html.TextAreaFor(x => x.Body, new { @cols = "10", @class = "validate[required]", @rows = "10", @id = "ckeditorId" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                        
+                <div class="row-form">
+                    <div class="span2">
+                        Meta title</div>
+                    <div class="span9">
+                        @Html.TextBoxFor(x => x.MetaTitle)</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Meta keyword:</div>
+                    <div class="span9">
+                        @Html.TextBoxFor(x => x.MetaKeywords)</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Meta description:</div>
+                    <div class="span9">
+                        @Html.TextAreaFor(x => x.MetaDescription)</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                    </div>
+                    <div class="span9">
+                        <input type="submit" class="btn btn-info span3" value="Submit" /></div>
+                    <div class="clear">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

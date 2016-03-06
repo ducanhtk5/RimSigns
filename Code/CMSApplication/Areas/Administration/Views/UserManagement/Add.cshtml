@@ -1,0 +1,142 @@
+﻿@model CMSApplication.Areas.Administration.Models.UserModel
+@{ 
+    ViewBag.Title = "Add user";
+}
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery("#UserForm").submit(function () {
+            // validate
+            // and post
+            jQuery.post(jQuery(this).attr("action"), jQuery("#UserForm").serialize(), function (returnObj) {
+
+                if (returnObj.Status == "success") {
+                    if (returnObj.Message != null) {
+                        $.pnotify({
+                            title: 'Success',
+                            text: returnObj.Message,
+                            type: 'info',
+                            opacity: .8
+                        });
+                        $("form input:text").val('');
+                        $("form input:password").val('');
+                        $("form textarea").val('');
+                    }
+                    else if (returnObj.RedirectUrl != null) {
+                        window.location.href = returnObj.RedirectUrl;
+                    }
+                } else {
+                    $.pnotify({
+                        title: 'Error',
+                        text: returnObj.Message,
+                        type: 'error',
+                        opacity: .8
+                    });
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Add new Client/User</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+             @using (Html.BeginForm("AddUser", "UserManagement", FormMethod.Post, new { enctype = "multipart/form-data", @id="UserForm" }))
+{
+                <div class="warning-area">
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Roles
+                    </div>
+                    <div class="span5">
+                        @Html.DropDownList("rolesId", "choose one roles")</div>
+                        <div class="clear"></div>
+                </div>
+                 <div class="row-form">
+                    <div class="span2">
+                        Company name : </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.CompanyName, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.CompanyName)</div>
+                         <div class="clear"></div>
+                </div>
+                 
+                 <div class="row-form">
+                    <div class="span2">
+                        Company logo : </div>
+                    <div class="span5">
+                        <input type="file" name="FileUp" /></div>
+                         <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Contact name : </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.FullName, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.FullName)</div>
+                         <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Email : </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Email, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.Email)</div>
+                         <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       User name : </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.UserName, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.UserName)</div>
+                         <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Password : </div>
+                    <div class="span5">
+                        @Html.PasswordFor(model => Model.Password, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.Password)</div>
+                         <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Description : </div>
+                    <div class="span5">
+                        @Html.TextAreaFor(model => Model.Description, new { @style = "width:500px; height:150px" })
+                        @Html.ValidationMessageFor(model => model.Description)</div>
+                         <div class="clear"></div>
+                </div>
+                 <div class="row-form">
+                    <div class="span2">
+                        Address : </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Address, new { @style = "width:500px" })
+                        @Html.ValidationMessageFor(model => model.Address)</div>
+                         <div class="clear"></div>
+                </div>
+                                           
+                <div class="row-form">
+                    <div class="span2">
+                    </div>
+                    <div class="span5">
+                        <br />
+                        <input type="submit" name="save" value="Submit" class="btn" /></div> <div class="clear"></div>
+                </div>
+}
+
+        </div>
+    </div>
+</div>

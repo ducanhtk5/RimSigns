@@ -1,0 +1,82 @@
+﻿@model CMSApplication.Areas.Administration.Models.ReviewModel
+@{  
+    ViewBag.Title = "Add new review feature";
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        CKEDITOR.replace('ckeditorId', {
+            filebrowserImageUploadUrl: '@Url.Action("UploadImage", "Management")',
+            height: "200"
+        });
+    });
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+                Add new review feature</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("AddOrUpdate", "ReviewsManagement", FormMethod.Post, new { enctype = "multipart/form-data", @id = "validation" }))
+            {
+                @Html.HiddenFor(x => x.Id)
+                <div class="warning-area">
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Restaurant :
+                    </div>
+                    <div class="span5">
+                        @Html.DropDownList("RestaurantId")
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Details :
+                    </div>
+                    <div class="span8">
+                        @Html.TextAreaFor(x => x.Details, new { @cols = "5", @rows = "5",@style="height:150px;" })
+                        @Html.ValidationMessageFor(x => x.Details)</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Review Type :
+                    </div>
+                    <div class="span5">
+                        @Html.DropDownListFor(x => x.ReviewType, new[] { 
+                            new SelectListItem() {Text = "Feature Review", Value ="1"}, 
+                            new SelectListItem() {Text = "Review", Value = "0"} 
+                            }, "Choose an option", new { @class = "validate[required]" })
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Published :
+                    </div>
+                    <div class="span5">
+                        @Html.CheckBoxFor(x=>x.Published)
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                    </div>
+                    <div class="span5">
+                        <br />
+                        <input type="submit" name="save" value="Submit" class="btn" /></div>
+                    <div class="clear">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

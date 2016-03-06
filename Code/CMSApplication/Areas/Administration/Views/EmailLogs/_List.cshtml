@@ -1,0 +1,110 @@
+﻿@model List<CMS.Data.EmailLog>
+@{
+    Layout = null;
+}
+<script type="text/javascript">
+    //    $(document).ready(function () {
+    //        $("#tEmail").dataTable({ "iDisplayLength": 5, "aLengthMenu": [50, 100, 150], "sPaginationType": "full_numbers", "aoColumns": [{ "bSortable": false }, null, null, null, null] });
+    //    });
+
+</script>
+@if (Model.Count() > 0)
+{
+    <table class="table dataTable" id="tEmail" style="width: 100%">
+        <thead>
+            <th>Id
+            </th>
+            <th>EmailTo
+            </th>
+            <th>Title
+            </th>
+            <th>Created On
+            </th>
+            <th>Status
+            </th>
+            <th>Sending On
+            </th>
+            <th>Sent On
+            </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="Spanid" style="display: none;">@item.Id</span> <span class="spanName">@item.Id
+                        </span>
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.EmailTo))
+                        {
+                            <span>@item.EmailTo</span>
+                        }
+                        else
+                        {
+                            <span>Administrator</span>
+                        }
+                    </td>
+                    <td>
+                        <span>@item.Title</span>
+                        @if (item.Status == 2)
+                        {
+                            <br />
+                            <span><b style="color: Red;">Exception</b>: @item.ErrorMessage</span>
+                        }
+                    </td>
+                    <td>
+                        <span>@item.CreatedOn.ToString("MM/dd/yyyy HH:mm:ss")</span>
+                    </td>
+                    <td>
+                        @if (item.Status == 0)
+                        {
+                            <span>Waiting before send</span>
+                        }
+                        else if (item.Status == 1)
+                        {
+                            <span>Sending</span>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <span>Failure</span>
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <span>Sent</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Status > 0)
+                        {
+                            <span>
+                                @item.StartSendingOn.ToString("MM/dd/yyyy HH:mm:ss")
+                            </span>
+                        }
+                        else
+                        {
+                            <span>&nbsp;</span>
+                        }
+                    </td>
+                    <td>
+                        @if (item.Status >= 2)
+                        {
+                            <span>
+                                @item.SentOn.ToString("MM/dd/yyyy HH:mm:ss")
+                            </span>
+                        }
+                        else
+                        {
+                            <span>&nbsp;</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>No Emails
+    </h2>
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Sign Estimation submitted successfully ";
+}
+
+<div data-role="header" data-position="fixed">
+    <h1>Sign Estimation submitted successfully</h1>
+    <a href="#sideNav" id="navIcon"><i class="icon-th-list"></i></a>
+</div>
+
+<div data-role="content">
+    <div>
+        Thanks for your submit. We sent to you one email to confirm
+        all of your information. We will check your information and will contact with you
+        very soon.<br /><br /><br />
+        <br /><br /><br />
+    </div>
+    <div style="font-style: italic; color:#c5c5c5; ">
+        This page will be redirected in 5 seconds.......
+    </div>
+</div>
+
+<script language="javascript">
+    jQuery(document).ready(function () {
+        setTimeout(function () {
+            window.location.href = "/";
+        }, 5000);
+    });
+</script>

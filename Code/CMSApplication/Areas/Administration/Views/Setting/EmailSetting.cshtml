@@ -1,0 +1,85 @@
+﻿@using CMSApplication.Areas.Administration.Models;
+@model EmailSetting
+@{
+    ViewBag.Title = "Email Setting";
+}
+
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Email Setting</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("EmailSetting", "Setting", FormMethod.Post))
+            {
+                <div class="row-form">
+                        <div class="span2">
+                            Display name :</div>
+                        <div class="span5">
+                            @Html.TextBoxFor(x => x.DisplayName, new { @class = "span8" })</div>
+                            <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Email Account :</div>
+                        <div class="span5">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "span8" })</div>
+                            <div class="clear"></div>
+
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Password:</div>
+                        <div class="span5">
+                            @Html.PasswordFor(x => x.Password, new { @class = "span8", value= Model.Password })</div>
+                            <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Recieve Email :
+                        </div>
+                        <div class="span9">
+                           @Html.TextBoxFor(x => x.EmailRecieve, new { @class="span8"})</div>
+                           <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Host :
+                        </div>
+                        <div class="span9">
+                           @Html.TextBoxFor(x => x.Host, new { @class="span8"})</div>
+                           <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Port :
+                        </div>
+                        <div class="span9">
+                           @Html.TextBoxFor(x => x.Port, new { @class="span8"})</div>
+                           <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            EnableSSL :
+                        </div>
+                        <div class="span9">
+                           @Html.CheckBoxFor(x => x.EnableSSL)</div>
+                           <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                        </div>
+                        <div class="span5">
+                            <br />
+                            <input type="submit" class="btn" value="Submit" /></div>
+                            <div class="clear"></div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>

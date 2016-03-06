@@ -1,0 +1,337 @@
+﻿@{
+    ViewBag.Title = "Contact us custom signs near Carrollton| wood signs custom| wood yard signs";
+    ViewBag.Keywords = "business signs Dallas TX, directional signs, metal frame yard signs, signs Coppell TX, signs for my business near Carrollton, sign for my business in Southlake Texas.";
+    ViewBag.Description = "Real Estate Media can serve anywhere in Las Colinas, Southlake, Coppell and parts of Addison and Dallas Fort Worth.";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model CMSApplication.Models.TopicModel
+  <link href="../../Content/css/bootstrap.css" rel="stylesheet" />
+<style type="text/css">
+    .main_send_ma
+    {
+        float: right;
+        border-radius: 5px;
+        background: url(../../Content/img/remsigns/_border_letter_12.png) 0 0 scroll;
+        padding: 5px !important;
+        -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.2) inset;
+        -moz-box-shadow: 0 0 1px rgba(0,0,0,0.2) inset;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.2) inset;
+        background-clip: padding-box;
+    }
+    
+    .send_email_contact
+    {
+        border: 1px dotted beige;
+        padding: 20px;
+        background: url(../../Content/img/remsigns/_bgchildletter_12.png) 0 0 scroll;
+        border-radius: 5px;
+    }
+    
+    .send_email_contact .item-name
+    {
+        color: #CF451C;
+        font-weight: bold;
+    }
+    
+    ._contactusbutton
+    {
+        overflow: visible;
+        width: auto;
+        border: 0;
+        padding: 0 10px 0 10px;
+        margin: 0;
+        cursor: pointer;
+        height: 33px;
+        background: chocolate;
+        line-height: 31px;
+        font-size: 14px;
+        text-transform: uppercase;
+        font-family: 'Oswald' , sans-serif;
+        border-radius: 3px;
+        font-weight: normal;
+        float: left;
+        font: normal 14px/31px 'Oswald' ,sans-serif;
+        text-align: center;
+        white-space: nowrap;
+        color: white;
+    }
+    
+    ._contactusbutton:hover
+    {
+        background: firebrick;
+        color: White;
+    }
+    
+    
+    .email_cont
+    {
+        width: 125px !important;
+    }
+    a:hover
+    {
+        text-decoration: none;
+    }
+</style>
+<div id="contents2">
+    <!-- Map -->
+    <div class="row" style="margin-bottom: 5px; font-weight: bold; font-size: 16px; margin-left: 0px;">
+        <div class="span9">
+            <h2>Contact us</h2>
+        </div>
+        <div>
+        </div>
+    </div>
+    <div style="display: none;" id="_realContactUsBody">@Html.Raw(@Html.Action("RealContactUsBody", "Home").ToString())</div>
+    <div style="display: none;" id="_realContactUsLatLng">@Html.Action("RealContactUsLatLng", "Home").ToString()</div>
+    <div id="map_canvas" style="width: 100%; height: 300px; margin-top: 10px">
+    </div>
+
+    <!-- End Map -->
+
+    <div id="conizq2">
+        @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "contactus", show_title = false })
+    </div>
+
+    <!--Fin a la de enmedio-->
+
+    <div id="conder2">
+        <div class="main_send_ma">
+                     <div class="send_email_contact">
+                            <div style="color: Red; font-weight: bold;" class="warning-area">
+                            </div>
+                            <table class="table-container" width="100%">
+                                <tbody>
+                                    <tr class="row">
+                                        <td class="item-name">
+                                            <div style="width: 100px !important;">
+                                                Full Name:</div>
+                                        </td>
+                                        <td class="item-value">
+                                            <input id="Name" name="Name" placeholder="Name" style="width:450px;" type="text" value="">
+                                            <span id="ctl00_cph1_ctrlContactUs_txtFullName_rfvValue" style="color: Red; font-family: verdana;
+                                                font-size: 9pt; display: none;">*</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="row">
+                                        <td class="item-name">
+                                            E-Mail Address:
+                                        </td>
+                                        <td class="item-value">
+                                            <input id="Email" name="Email" placeholder="Email" style="width:450px;" type="text" value="">
+                                            <span id="ctl00_cph1_ctrlContactUs_txtEmail_rfvValue" style="color: Red; display: none;">
+                                                *</span> <span id="ctl00_cph1_ctrlContactUs_txtEmail_revValue" style="color: Red;
+                                                    display: none;">Wrong email format</span>
+                                        </td>
+                                    </tr>
+
+                                    <tr class="row">
+                                        <td class="item-name">
+                                            Phone:
+                                        </td>
+                                        <td class="item-value">
+                                            <input id="Phone" name="Phone" placeholder="Phone" style="width:450px;" type="text" value="">
+                                        </td>
+                                    </tr>
+
+                                    <!--<tr class="row">
+                                        <td class="item-name">
+                                            State:
+                                        </td>
+                                        <td class="item-value">
+                                            <input id="State" name="State" placeholder="State" style="width:450px;" type="text" value="">   
+
+
+                                        </td>
+                                    </tr>
+                                    -->
+                                    <tr class="row">
+                                        <td class="item-name">
+                                            Comment:
+                                        </td>
+                                        <td class="item-value">
+                                            <textarea class="ckeditor Comment" cols="30" id="ckeditor" name="Comment" placeholder="Message..." rows="5" style="width:450px;height:200px;"></textarea>
+                                        </td>
+                                    </tr>
+                                    
+                                    <tr class="row">
+                                        <td class="item-name">
+                                        </td>
+                                        <td class="button">
+                                            <!-- captcha -->
+                                            @Html.ValidationSummary(true)   
+                                            @Html.Partial("_Captcha", new CMSApplication.Areas.Administration.Models.Captcha())
+                                            @Html.Partial("_InvisibleCaptcha", new CMSApplication.Areas.Administration.Models.InvisibleCaptcha())                   
+                                            <!-- captcha -->
+                                            <input type="submit" class="btn submitBtn" value="Send Contact" />                                            
+                                            <br />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+             </div>
+     
+    </div>
+
+    <div class="clear"></div>
+
+</div>
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDq7skUApJ5P6nmEtamguXV6neqigI4JLk&amp;sensor=false">
+</script>
+
+<!-- For map -->
+<script type="text/javascript">
+    var getinfo = $('#_realContactUsBody').html();
+    var _lll = $('#_realContactUsLatLng').html();
+    var _arr = _lll.split(",");
+    var _lat1 = _arr[0];
+    var _lng1 = _arr[1].replace(" ", "");
+    //var lat = 10.73217; //32.935199;
+    //var lng = 106.701014; //-97.199521;
+    var lat = _lat1;
+    var lng = _lng1;
+    var marker;
+    var map;
+    var latlng = new google.maps.LatLng(_lat1, _lng1);
+
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        }
+        else { $(".spanMesssage").html("Geolocation is not supported by this browser."); }
+    }
+
+    function showPosition(position) {
+        var clatCurrent = position.coords.latitude;
+        var clonsCurrent = position.coords.longitude;
+        var to = new google.maps.LatLng(clatCurrent, clonsCurrent);
+        calcRoute(to);
+    }
+
+    var directionsDisplay;
+    var directionsService = new google.maps.DirectionsService();
+    var map;
+
+    function calcRoute(tos) {
+        var forms = new google.maps.LatLng(lat, lng);
+        var request = {
+            origin: tos,
+            destination: forms,
+            travelMode: google.maps.TravelMode.DRIVING
+        };
+        directionsService.route(request, function (result, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(result);
+            }
+            else { alert('Sorry, we can not find the direction for you to go to our office.'); }
+        });
+    }
+
+    function showError(error) {
+        switch (error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+
+
+    function toggleBounce() {
+
+        if (marker.getAnimation() != null) {
+            marker.setAnimation(null);
+        }
+        else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    }
+    function loadinfo() {
+        var infowindow = new google.maps.InfoWindow({
+            content: getinfo,
+            maxWidth: 300,
+            position: latlng
+        });
+        infowindow.open(map);
+        google.maps.event.addListener(map, 'zoom_changed', function () {
+            var zoomLevel = map.getZoom();
+            //map.setCenter(latlng);
+            infowindow.setContent(getinfo);
+        });
+    }
+    function initialize() {
+        directionsDisplay = new google.maps.DirectionsRenderer();
+        var mapOptions = {
+            center: latlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_canvas"),
+            mapOptions);
+        directionsDisplay.setMap(map)
+        marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            title: 'Real Estate Media'
+        });
+        loadinfo();
+        google.maps.event.addListener(marker, 'click', toggleBounce);
+
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+<!-- end for map -->
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".submitBtn").click(function () {
+                    $(".loading-box").fadeIn("slow");
+                    $.post("/Home/SendContactMail", {
+                        Email: $("#Email").val(),
+                        Name: $("#Name").val(),
+                        Phone: $("#Phone").val(),
+                        Comment: $(".Comment").val(),
+                        CaptchaValue: $("#CaptchaValue").val()
+                    }, function (data) {
+                        if (data == "ok") {
+                            $(".loading-box").fadeOut("slow");
+                            clear();
+                            alert("Your Message has been sent, Thank you...");
+                            window.location = "/Home/Index";
+                        } else {
+                            $(".loading-box").fadeOut("slow");
+                            alert(data);                           
+                        }
+                    })
+
+        })
+
+
+
+        function clear() {
+            $("#Email").val("");
+            $("#Name").val("");
+            $("#Phone").val("");
+            $("#Comment").val("");
+        }
+
+    })
+</script>
+
+

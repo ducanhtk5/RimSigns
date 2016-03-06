@@ -1,0 +1,354 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ClientProfileLayout.cshtml";
+}
+
+@model CMSApplication.Models.OrderModels
+<script src="../../Content/js/dropdownlist/chosen.jquery.js"></script>
+<link href="../../Content/css/dropdownlist/chosen.css" rel="stylesheet" />
+<script src="../../Content/js/plugins/select2/select2.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#e12").select2({
+            tags: [""]
+        });
+        /////// Add Multiplte
+        var max_input = 11;
+        var now_input = 0;
+        jQuery("#addfile").click(function () {
+            now_input++;
+            if (now_input >= max_input)
+                return false;
+            //add file
+            var input = document.createElement("input");
+            input.type = "file";
+            input.name = "FileUp";
+
+            //---
+            jQuery('#upload_list').append(input);
+            jQuery('#upload_list').find("input:file").not(".skip").uniform();
+        });
+        //////////End 
+    });
+
+</script>
+
+@if (Model.OrderPercent.Equals(100))
+{
+    using (Html.BeginForm("OrderComplete", "Order", FormMethod.Post))
+    {           
+    <div class="row-fluid">
+        <div class="span12">
+            @Html.HiddenFor(c=>c.Id)
+            <input type="hidden" name="Status" value="Complete" />
+            <button type="submit" class="btn">Complete</button>
+        </div>
+    </div>
+    }
+}
+<div class="row-fluid">
+        <div class="span7">
+        <div class="head">
+            <div class="isw-brush"></div>
+            <h1>Order detail</h1>
+            <div class="clear"></div>
+        </div>
+        <div class="block">
+            @Html.HiddenFor(c => c.LatLng)
+            @Html.HiddenFor(c => c.Address)
+            <h3>@Model.Title</h3>
+            <p>@Model.OrderDate</p>
+            
+            <p><strong>Address: </strong><a style="text-decoration: underline;" href="http://maps.google.com/maps?output=csv&oe=utf8&sensor=false&q=@Model.Address" target="_blank">@Model.Address</a></p>
+            <p><strong>Size: </strong>@Model.Size</p>
+            <p><strong>Quantity: </strong>@Model.Quantity</p>
+            <p><strong>Type: </strong>@Model.Type</p>
+            <p><strong>Service Type: </strong>@Model.ServiceType</p>
+            <p><strong>Parties Email Address: </strong>@Model.Parties</p>
+            <p><strong>Parties Information: </strong>@Model.PartiesInformation</p>
+            <p><strong>Banner size: </strong>@Model.BannerSize</p>
+            <p><strong>Status: </strong>@Model.Status</p>
+            @*<p><strong>Percent: </strong>@Model.OrderPercent %</p>
+                 <div class="progress progress-striped active">
+                                    <div class="bar" style="width: @Model.OrderPercent%;"></div>
+                                </div>*@
+            <p></p>
+            <p>@Html.Raw(Model.Description)</p>
+        </div>
+
+    </div>
+
+        <div class="span5">
+        <div class="head">
+            <div class="isw-pin"></div>
+            <h1>Map</h1>
+            <div class="clear"></div>
+        </div>
+        <div class="block-fluid">
+            <div class="row-form">
+
+                        <div id="map_canvas" style="height:250px;width:100%"></div>
+                 
+                </div>
+            </div>
+
+    </div>
+
+</div>
+<div class="dr"><span></span></div>
+
+<div class="row-fluid">
+
+    <div class="span12">
+        <div class="head">
+            <div class="isw-chats"></div>
+            <h1>Comments</h1>
+            <ul class="buttons">
+            </ul>
+            <div class="clear"></div>
+        </div>
+        <div class="block messaging">
+                     @if (ViewBag.CommentFileList != null)
+            {
+                foreach (var item in ViewBag.CommentFileList)
+                {
+                    if (Model.OrderById.Equals(item.UserID))
+                    {                                   
+                <div class="itemOut">
+                    <a href="#" class="image">
+                        <img width="50" height="50" src="@Url.Content("~/Content/File/Remsigns/" + item.UserImage)" class="img-polaroid" /></a>
+                    <div class="text">
+                        <div class="info">
+                            <span class="name">@item.UserName</span>
+                            <span class="date">@item.CreatedDate</span>
+                            <div class="clear"></div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FileUrl))
+                        {
+                            <i class="icon-file"></i>
+                            <span>Upload a file</span>
+                          if(item.IsImage == true)
+                            {
+                           <a href="@Url.Content("~/" + item.FileUrl)" class="fancybox">@item.Contents</a><br /><span style="font-style:italic">@item.Note</span>
+                        }else
+                        {
+                            <a href="@Url.Content("~/" + item.FileUrl)">@item.Contents</a><br /><span style="font-style:italic">@item.Note</span>
+                            }
+                        }
+                        else
+                        {
+                            @item.Contents
+                        }
+                        
+                    </div>
+                </div>
+                    }
+                    else
+                    {
+                <div class="itemIn">
+                    <a href="#" class="image">
+                        <img width="50" height="50" src="@Url.Content("~/Content/File/Remsigns/" + item.UserImage)" class="img-polaroid" /></a>
+                    <div class="text">
+                        <div class="info">
+                            <span class="name">@item.UserName</span>
+                            <span class="date">@item.CreatedDate</span>
+                            <div class="clear"></div>
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.FileUrl))
+                        {
+                            <i class="icon-file"></i>
+                            <span>Upload </span>
+                            if(item.IsImage == true)
+                            {
+                           <a href="@Url.Content("~/" + item.FileUrl)" class="fancybox">@item.Contents</a><br /><span style="font-style:italic">@item.Note</span>
+                        }else
+                        {
+                            <a href="@Url.Content("~/" + item.FileUrl)">@item.Contents</a><br /><span style="font-style:italic">@item.Note</span>
+                            }
+                        }
+                        else
+                        {
+                            @item.Contents
+                        }
+                        
+                    </div>
+                </div>
+                    }
+                }
+            }
+            <div class="controls">
+                @using (Html.BeginForm("SendComment", "Order", FormMethod.Post))
+                {
+                    <input type="hidden" name="OrderId" value="@Model.Id" />
+                    <div class="control">
+                        <textarea name="Contents" placeholder="Your message..." style="height: 70px; width: 100%;"></textarea>
+                    </div>
+                    <button type="button" id="add_parties_btn" class="btn">Add Parties</button>
+                    <button type="button" id="popup_4" class="btn">Upload Files</button>
+                    <button type="submit" class="btn">Post Comment</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".chzn-select").chosen();
+        $(".chzn-select-deselect").chosen({ allow_single_deselect: false });
+        $(".chzn-select").change(function () {
+        });
+
+        //$(".chzn-select option").attr("selected", true);s
+
+        $("#b_popup_4").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 400,
+            buttons: {
+                "Ok": function () {
+                    $("#form-upload").submit();
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#popup_4").click(function () { $("#b_popup_4").dialog('open') });
+
+        $("#b_popup_addparties").dialog({
+            autoOpen: false,
+            modal: true,
+            width: 400,
+            buttons: {
+                "Ok": function () {
+                    $("#form-add-parties").submit();
+                },
+                Cancel: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $("#add_parties_btn").click(function () { $("#b_popup_addparties").dialog('open') });
+
+
+        $("#slider_1").slider({
+            value: $("#slider_1_amount").attr("order-percent"),
+            orientation: "horizontal",
+            range: "min",
+            animate: true,
+            slide: function (event, ui) {
+                $("#slider_1_amount").html(ui.value + "%");
+                $("#order-percent").val(ui.value);
+            }
+        });
+
+    })
+
+
+</script>
+
+<div class="dialog" id="b_popup_4" style="display: none;" title="Upload files">    
+     @using (Html.BeginForm("UploadFile", "Order", FormMethod.Post, new { @id = "form-upload", enctype = "multipart/form-data" }))
+     {                            
+        <div class="block">
+            <input type="hidden" name="Id" value="@Model.Id" />
+                    <input type="hidden" name="Title" value="@Model.Title" />
+                    <input type="hidden" name="OrderById" value="@Model.OrderById" />
+                    <input type="hidden" name="OrderByName" value="@Model.OrderByName" />
+            <span>Add Files to upload:<a id="addfile" href="javascript:void(0)">
+                            <img src="/Areas/Administration/Content/img/add.png" alt="add file" /></a></span>
+            <p id="upload_list">                    
+            </p>
+
+            <p>
+                <textarea rows="2" name="fileNote" placeholder="Description"></textarea>
+            </p>
+        </div>
+     }
+    </div>
+
+
+<div class="dialog" id="b_popup_addparties" style="display: none;" title="Add parties">    
+     @using (Html.BeginForm("AddParties", "Order", FormMethod.Post, new { @id = "form-add-parties"}))
+     {                            
+        <div class="block">
+            <p>Add Parties Email:</p>
+            <p>
+                    @Html.HiddenFor(c => c.Id)
+                        @Html.TextBoxFor(c => c.Parties, new { id = "e12", @style = "width:350px" })
+                <br />
+                <span>Press "Tab" to complete a Partier</span>
+
+            </p>
+  
+        </div>
+        }
+    </div>
+
+<div class="dialog" id="b_popup_2" style="display: none;" title="View File">
+        <p style="text-align:center" class="file-show"></p>                
+    </div> 
+
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDq7skUApJ5P6nmEtamguXV6neqigI4JLk&amp;sensor=false&amp;language=en"></script> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script> 
+<script type="text/javascript">
+    var map;
+    var _latlng;
+    var openmap = 0;
+    var _address;
+    var _markerArr = []; var geocoder;
+    function initialize(val, _add) {
+        openmap++;
+        var _flat = false;
+        var _defaultLatLng = new google.maps.LatLng(31.287993235583038, -92.44133689116097);
+        if (val == undefined || val == 'undefined' || val == '') { } else {
+            var _arr = val.split(',');
+            _defaultLatLng = new google.maps.LatLng(_arr[0], _arr[1]);
+            _flat = true;
+        }
+        var mapOptions = {
+            zoom: 15,
+            center: _defaultLatLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+        };
+        map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+        if (_flat == true) {
+            placeMarker(_defaultLatLng, map);
+        }
+    }
+
+    function placeMarker(position, map) {
+        ////// For Geo Code
+        ////// For Geo Code
+        for (var i = 0; i < _markerArr.length; i++) {
+            _markerArr[i].setMap(null);
+        }
+        _markerArr = [];
+        var marker = new google.maps.Marker({
+            position: position,
+            map: map
+        });
+        _markerArr.push(marker);
+        map.panTo(position);
+        _latlng = position;
+    }
+
+    $(document).ready(function () {
+        var _LatLon1 = jQuery("#LatLng").val();
+        var _add1 = jQuery("#Address").val();
+        if (openmap == 0) {
+            if (_LatLon1 == undefined || _LatLon1 == 'undefined' || _LatLon1 == '' || _LatLon1 == null) {
+                initialize();
+            }
+            else {
+                initialize(_LatLon1, _add1);
+            }
+        }
+    })
+</script>
+

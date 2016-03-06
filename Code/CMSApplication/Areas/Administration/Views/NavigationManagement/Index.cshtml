@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<a class="btn" href="/Administration/NavigationManagement/Add"><span>Add new menu</span></a>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Setting Management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid">
+    <div class="listRolesName list">
+        @Html.Action("ListNavigation", "NavigationManagement", null)
+    </div>
+</div>

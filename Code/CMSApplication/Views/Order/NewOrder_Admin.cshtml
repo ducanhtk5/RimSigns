@@ -1,0 +1,26 @@
+﻿@{
+    string Name = ViewData["name"].ToString();
+}
+@using CMSApplication.Models
+@using CMS.Service.Common
+@model CMSApplication.Models.OrderModels
+                      
+Hi Administrator of Real Estate Media<br />
+On @DateTime.Now.ToString("MM/dd/yy H:mm:ss") Real Estate Media received order from @Name.<br />
+<br />
+Here is order detail : <br /><br />
+Project Name: @Model.Title<br />
+Address: @Model.Address<br />
+Size: @Model.Size<br />
+Type: @Model.Type<br />
+Service Type: @Model.ServiceType<br />
+Banner Size: @Model.BannerSize<br />
+Quantity: @Model.Quantity<br />
+Parties Email Address: @Model.Parties<br />
+Parties Information: @Html.Raw(@Model.PartiesInformation)<br />
+Description: @Html.Raw(@Model.Description)<br />
+
+<br />
+Thanks & Regards
+<br />
+Real Estate Media

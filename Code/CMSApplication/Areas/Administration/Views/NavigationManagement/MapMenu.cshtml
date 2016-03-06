@@ -1,0 +1,39 @@
+﻿@using CMS.Data
+
+@model List<Navigation>
+           
+@if (Model.Count() > 0)
+{
+    var listParent = Model.Where(l => l.ParentID == 0).ToList();
+    int i = 0;
+    <ul id="nav" style="margin: 0 auto; width: 790px; float: none; margin-top: 25px; z-index: 101;">
+        @foreach (var item in listParent)
+        {
+            var listChild  = Model.Where( l => l.ParentID == item.Id).ToList();
+            <li><a href="/@item.Link">@item.Name</a>
+            @if (item.Name.Contains("Portfolio")) 
+            { 
+                @Html.Action("_ListCatalogGalery", "Gallery", new { area= "" }) 
+            } 
+            @if(listChild.Count () > 0)
+            {
+                <ul>
+                @foreach (var item_sub in listChild) 
+                {
+                    <li><a href="/@item_sub.Link">@item_sub.Name</a></li>
+                }
+                </ul>
+            }
+             </li>            
+            if (i == listParent.Count()-1)
+            {
+                <li class="navi_line"></li>
+            }
+            else
+            {
+                <li class="navi_line">| </li>
+            }
+            i++;
+        }
+    </ul>
+}

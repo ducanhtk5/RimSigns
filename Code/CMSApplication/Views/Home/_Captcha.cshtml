@@ -1,0 +1,13 @@
+﻿@model CMSApplication.Areas.Administration.Models.Captcha
+<div class="editor-label" style="color: #000;">
+    @*Html.LabelFor(model => model.CaptchaValue)*@
+    Please enter captcha to submit 
+</div>
+<div class="editor-field">
+    <span style="display:block; float:left"><img src='@Url.Content("~/Captcha/Show")' alt="" class="captcha_img" /></span>
+    
+    <span style="display:block; float:left; margin-left:5px">@Html.TextBoxFor(m => m.CaptchaValue, new { @class = "captcha_input validate[required]" })</span>
+    
+    @Html.ValidationMessageFor(model => model.CaptchaValue)
+    <br class="clear" />
+</div>

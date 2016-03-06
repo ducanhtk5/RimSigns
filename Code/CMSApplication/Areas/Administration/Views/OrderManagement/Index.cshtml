@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Orders Management";
+    int user_id = int.Parse(ViewData["user_id"].ToString());
+}
+
+
+
+<div class="row-fluid">
+                
+                <div class="span12">
+                   <div class="span2">
+                       <a class="btn" href="@Url.Action("Add", "OrderManagement", new {userId = 0})"><span>Add new order</span></a>
+                       </div>
+                    
+                    <div class="span4">
+                        <input id="order-search-key" style="float:right; margin-right:10px; width:100%" type="text" name="keys" placeholder="Search by title, status, type..."/>
+                       </div>
+
+                    <div class="span6">
+                        <input type="text" style="float:right; margin-right:10px" id="sort-to-date" name="day_to" placeholder="to..." />
+                        <input type="text" style="float:right; margin-right:10px" id="sort-from-date" name="day_from" placeholder="Search from day..." />
+                       </div>
+
+                </div>
+                
+            </div>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Orders Management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid list">
+         @Html.Action("List", "OrderManagement", new { page = 1, userId=user_id })
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+        $("#sort-to-date").datepicker();
+        $("#sort-from-date").datepicker();
+        $("#sort-to-date").change(function () {
+            if ($("#sort-from-date").val() != "") {
+                SortByDay();
+            }
+        })
+
+        $("#sort-from-date").change(function () {
+            if ($("#sort-to-date").val() != "") {
+                SortByDay();
+            }
+        })
+
+        function SortByDay()
+        {
+            $.post("/Administration/OrderManagement/SortByDay", {
+                day_to: $("#sort-to-date").val(),
+                day_from: $("#sort-from-date").val(),
+            }, function (data) {
+                $(".list").html(data);
+            })
+        }
+
+        $("#order-search-key").keyup(function (e) {
+            if (e.keyCode == 13) {
+                $.post("/Administration/OrderManagement/FullSearch", {
+                    keys: $("#order-search-key").val()
+                }, function (data) {
+                    $(".list").html(data);
+                })
+            }
+        })
+    })(jQuery)
+
+</script>

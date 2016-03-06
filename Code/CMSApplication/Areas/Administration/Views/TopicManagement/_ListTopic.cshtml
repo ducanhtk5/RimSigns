@@ -1,0 +1,15 @@
+﻿@using CMS.Data
+@using CMSApplication.Areas.Administration.Models
+@model IEnumerable<TopicModel>
+@if (Model.Count() > 0)
+{
+    <ul class="listtopic">
+        @foreach (var item in Model)
+        {
+            <li>
+                <input type="radio" value="Detail/@item.SystemName" name="listtopic" id="listtopic"/>
+                @Html.ActionLink(item.SystemName, "Detail", "Topic", new { area = "", systemname = item.SystemName }, null)
+            </li>
+        }
+    </ul>
+}

@@ -1,0 +1,56 @@
+﻿@using CMS.Data
+@model List<Navigation>
+@if (Model.Count() > 0)
+{
+    var listParent = Model.Where(l => l.ParentID == 0).ToList();
+    int i = 0;
+    
+@*<div align="center">
+                <a href="@Url.Action("Index", "Home")" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image6','','../../Content/img/remsigns/images/images/3.jpg',1)">
+                <img src="../../Content/img/remsigns/images/images/bof_03.jpg" width="107" height="54" id="Image6" /></a> 
+                <a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image7','','../../Content/img/remsigns/images/images/6.jpg',1)">
+                    <img src="../../Content/img/remsigns/images/images/bof_06.jpg" width="168" height="54" id="Image7" /></a>
+                <a href="@Url.Action("Index", "Gallery")" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image8','','../../Content/img/remsigns/images/images/7.jpg',1)"><img src="../../Content/img/remsigns/images/images/bof_07.jpg" width="168" height="54" id="Image8" /></a>
+                <a href="#" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image9','','../../Content/img/remsigns/images/images/5.jpg',1)"><img src="../../Content/img/remsigns/images/images/bof_05.jpg" width="85" height="54" id="Image9" /></a>
+                <a href="@Url.Action("AboutUs", "Home")" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image10','','../../Content/img/remsigns/images/images/4.jpg',1)"><img src="../../Content/img/remsigns/images/images/bof_04.jpg" width="104" height="54" id="Image10" /></a>
+                <a href="@Url.Action("ContactUs", "Home")" onmouseout="MM_swapImgRestore()" onmouseover="MM_swapImage('Image11','','../../Content/img/remsigns/images/images/8.jpg',1)"><img src="../../Content/img/remsigns/images/images/bof_08.jpg" width="132" height="54" id="Image11" /></a>
+
+    </div>*@
+    
+    <div class="main_navi" >
+        <div class="navi_panel">
+            <ul style="text-align: right;">
+                @foreach (var item in listParent)
+                {
+                    var listChild = Model.Where(l => l.ParentID == item.Id).ToList();
+                    <li><a href="/@item.Link">@item.Name</a>
+                        @if (listChild.Count() > 0)
+                        {
+                            <ul>
+                                @foreach (var item_sub in listChild)
+                                {
+                                    <li><a href="/@item_sub.Link">@item_sub.Name</a></li>
+                                }
+                            </ul>
+                        }
+                    </li>            
+                        if (i == listParent.Count() - 1)
+                        {
+                    <li class="navi_line"></li>
+                        }
+                        else
+                        {
+                    <li class="navi_line"></li>
+                        }
+                        i++;
+                }
+
+              @*  @if (User.Identity.IsAuthenticated)
+                { 
+                 <li><a href="/Home/Dashboard">Order</a></li>
+                }*@
+            </ul>
+            <div class="clear"></div>
+        </div>
+    </div>
+}

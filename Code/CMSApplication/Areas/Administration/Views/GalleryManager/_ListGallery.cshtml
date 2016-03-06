@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "List Gallery";
+}
+@model  List<CMSApplication.Areas.Administration.Models.GalleryModel>
+
+<script type="text/javascript">
+    function ChangeCode() {
+        var catalogid = $("#CatalogID").val();
+        $.get("/Administration/GalleryManager/ListGallery?catalogid="+catalogid+"&&page="+1, function (data) {
+            $(".listRolesName").html("");
+            $(".listRolesName").html(data);
+        });
+    }
+    $(document).ready(function () {
+        
+        $(".page-number").live("click", function () {
+            var catalogid = $("#CatalogID").val();
+            var page = parseInt($(this).html());
+                $.get("/Administration/GalleryManager/ListGallery?page="+page+"&&catalogid="+catalogid, function (data) {
+                    $(".listItemroles").html("");
+                    $(".listItemroles").html(data);
+                });
+        });
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var catalogid = $("#CatalogID").val();
+            var NameItem = $this.parents("tr").attr("data-name");
+            if (confirm("Are you sure delete gallery : " + NameItem + "")) {
+                var IdItem = $this.parents("tr").attr("data-id");
+                $.get("/Administration/GalleryManager/DeleteGallery?id=" + IdItem, function () {
+                    $.get("/Administration/GalleryManager/ListGallery?page=0&catalogid="+catalogid, function (data) {
+                        $(".listItemroles").html("");
+                        $(".listItemroles").html(data);
+                    });
+                });
+            }
+        });
+
+        jQuery("#ListTable").dataTable({
+            "sPaginationType": "full_numbers",
+            "iDisplayLength": 30,
+            "bSortable": false,
+            "aLengthMenu": [30, 50, 100]
+        });
+    });
+
+</script>
+
+
+ <table class="table" style="width:100%" id="ListTable">
+        <thead>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Order
+            </th>
+            <th>
+                Action
+            </th>
+        </thead>
+        <tbody>
+    @foreach (var item in Model)
+            {
+                <tr data-id="@item.ID" data-name="@item.Name">
+                    <td>
+                        <span >@item.Name</span>
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/Content/File/Remsigns/" + item.Thumbnail)" alt="@item.Name" width="150px" height="150px" />
+                    </td>
+                    <td>
+                            <div class="">
+                                <a class="btn" href="/Administration/GalleryManager/Move?gallery_id=@item.ID&direction=0"><span>Move Up</span></a>
+                                <a class="btn" href="/Administration/GalleryManager/Move?gallery_id=@item.ID&direction=1"><span>Move Down</span></a>
+                            </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-info AddNews" data-dialog-id="EditRoles" data-dialog-title="Edit Roles @item.Name" 
+                                href="/Administration/GalleryManager/EditGallery?id=@item.ID"><span>Edit</span></a>
+                        <a href="javascript:void(0);" class="btn btn-danger delete" id="detele"><span>Delete</span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+

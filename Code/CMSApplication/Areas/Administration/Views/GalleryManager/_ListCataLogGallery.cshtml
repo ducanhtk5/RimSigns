@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "_ListCataLogGallery";
+}
+
+@model List<CMSApplication.Areas.Administration.Models.CatalogGalleryModel>
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var NameItem = $this.closest('tr').find('.spanName').html();
+            if (confirm("Are you sure delete catalog gallery : " + NameItem + "")) {
+                var IdItem = $this.closest('tr').find('.Spanid').html();
+                $.get("/Administration/GalleryManager/DeleteCatalogGallery?id=" + IdItem, function () {
+                    $.get("/Administration/GalleryManager/ListCataLogGallery", function (data) {
+                        $(".listItemroles").html("");
+                        $(".listItemroles").html(data);
+                    });
+                });
+            }
+        });
+
+    });
+
+</script>
+
+
+
+
+<table class="table dataTable" style="width:100%">
+        <thead>
+            <th>
+                Name
+            </th>
+            <th>
+                Image
+            </th>
+            <th>
+                Descriptions
+            </th>
+            <th>
+                Action
+            </th>
+        </thead>
+        <tbody>
+    @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                                   <span class="Spanid" style="display: none;">@item.CatalogID</span> 
+                        <span class="spanName" style="display: none;">@item.Name
+                        </span>
+                        <span style="margin-left:20px;">@item.Name</span>
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/Content/File/Remsigns/" + item.Image)" alt="@item.Name" width="150px" height="150px" />
+                    </td>
+                    <td>
+                                  @if (!String.IsNullOrEmpty(item.Description))
+                    {
+                        <span class="spanNameTt">@Html.Raw(@item.Description)</span>
+                    }
+                    else
+                    {
+                        <span class="spanNameTt">No description.</span>
+                    }
+                    </td>
+                    <td>
+                        <a class="btn btn-info AddNews" data-dialog-id="EditRoles" data-dialog-title="Edit Roles @item.Name" 
+                                href="/Administration/GalleryManager/EditCatalogGallery?id=@item.CatalogID">Edit</a>
+<a href="javascript:void(0);" class="btn btn-danger delete" id="detele"><span>Delete</span></a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+
+

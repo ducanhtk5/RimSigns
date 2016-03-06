@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Homepage - business signs| sign design| design sign | signs Carrollton";
+    ViewBag.Keywords = "sign for my business, signs for business, commercial signs for businesses; yard signs uthlake TX, business Sign Company in Southlake Texas";
+    ViewBag.Description = "At Real Estate Media we manufacture and install any sign needed to market a commercial property throughout the Dallas Fort Worth, Texas area and the surrounding State.";
+    
+    @*Layout = "~/Views/Shared/_LayoutRemsigns.cshtml";*@
+}
+@model List<CMSApplication.Models.SlideModel>
+<div id="small_slider">
+    <div class="slider-wrapper theme-default">
+        <div id="slider" class="nivoSlider">
+            @foreach (var item in Model)
+            {
+                <img src="@Url.Content("~/Content/File/ImagesUpload/" + item.Images)" data-thumb="images/toystory.jpg" alt="" />
+            }
+        </div>
+    </div>
+
+</div>
+<div id="contents">
+    <div id="conizq">
+        <!-- Homepage Welcome -->
+        @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Homepage_Welcome_to_Real_Estate_Media", show_title = true })
+    </div>
+
+    <!-- Vertical news ticker -->
+    <script src="/Content/js/vertical%20news%20ticker/jquery.vticker-min.js"></script>
+    <script type="text/javascript">
+        jQuery(function () {
+            var max_height = 0;
+            jQuery(".textos_im li").each(function () {
+                if (jQuery(this).height() > max_height)
+                    max_height = jQuery(this).height();
+            });
+            jQuery(".textos_im li").height(max_height);
+            jQuery('.textos_im').vTicker({
+                speed: 500,
+                pause: 10000,
+                showItems: 1,
+                animation: 'fade',
+                mousePause: true,
+                height: max_height,
+                direction: 'up'
+            });
+        });
+    </script>
+    <style type="text/css">
+         .textos_im li
+         {
+             list-style: none;
+             color: Blue;
+         }
+    </style>
+    <div id="conder">
+        <!-- Begin : Top right Latest projects -->
+        <div class="tit-c1">Sign Tips</div>
+        <div class="textos_im" style=" overflow: hidden; position: relative; height: 70px;">
+            <ul>
+                <li>
+                    <span style="text-align: justify;">&quot;Signs are a 24/7 salesperson. The ROI is very favorable and any business will benefit from investing more in their signs than their competition&quot;. <b>Source</b>: <i>Marketing 101 For Dummies</i></span>
+                </li>
+                <li>
+                    <span style="text-align: justify;">&quot;Science says signs with borders are 26% more readable than signs with out borders. <b>Source</b>: <i>Sign Magazine</i></span>
+                </li>
+                <li>
+                    <span style="text-align: justify;">&quot;V- Shape signs are the most visible installation format for commercial real estate signs. <b>Source</b>: <i>Sign Magazine</i></span>
+                </li>
+                <li>
+                    <span style="text-align: justify;">&quot;Science says sans serif fonts(i.e. helvetica or arial) are 39% easier to read at a glance than serif fonts(i.e. Times Roman). <b>Source</b> <i>Sign Magazine</i></span>
+                </li>
+                <li>
+                    <span style="text-align: justify;">&quot;A consistent & easy to read sign layout offers the most benefit to the branding efforts of any company.</span>
+                </li>
+            </ul>
+        </div>
+        <br />
+        <div>
+        @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Homepage_Lastest_Project_Top_Right", show_title = false })
+        </div>
+ 
+        <!-- End : Top right latest projects -->
+    </div>
+     <!-- End vertical news ticker -->
+    <div class="clear"></div>
+</div>
+
+<div id="contents2">
+    <!-- Begin : bottom left -->
+     @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Homepage_Bottom_Left_Block", show_title = false })
+    @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Homepage_Bottom_Left_Block2", show_title = false })
+    <!-- End : bottom left -->
+    <!-- begin contact form -->
+    @Html.Action("ContactBlockHomepage", "Home")
+    <!-- end contact form -->
+    <div class="clear"></div>
+</div>

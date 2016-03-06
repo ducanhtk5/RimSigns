@@ -1,0 +1,21 @@
+﻿@using CMSApplication.Models
+@model TopicModel
+
+@{
+    ViewBag.Title = Model.Title+" "+Model.MetaTitle;
+    ViewBag.Keywords = Model.MetaKeywords;
+    ViewBag.Description = Model.MetaDescription;
+}
+
+@if (Model != null)
+{
+    
+    <div class="page_title">
+        @Model.Title
+    </div>
+    <blockquote>
+        <div>@MvcHtmlString.Create(@Model.Body)</div>
+    </blockquote>
+    <div class="clear">
+    </div>
+}

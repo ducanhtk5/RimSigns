@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "User Manager";
+}
+<script type="text/javascript">
+
+    function ChangeCode() {
+        var valueId = $("#RolesID").val();
+        $.get("/Administration/UserManagement/List?rolesId=" + valueId + "&page=" + 1, function (data) {
+            $(".listuser").html("");
+            $(".listuser").html(data);
+        });
+
+    }
+    function ChangeListRolesAdd() {
+        var valueIdCode = $("#ListRolesAdd").val();
+        $("#CoderolesId").val(valueIdCode);
+    }
+
+</script>
+<div class="row-fluid">
+    <div class="span4">
+        <a class="btn" href="/Administration/UserManagement/Add"><span>Add new Clients/Users</span></a></div>
+    <div class="span4">
+        <input id="user-search-key" type="text" name="keys" placeholder="Enter search keys..."/>
+        </div>
+    <div class="span4 sortuser">
+        Search user by: @Html.DropDownList("ListRoles", null, new { id = "RolesID", onchange = "ChangeCode()", @class = "select2-container" })</div>
+</div>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Clients/Users manager</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid listuser">
+        @Html.Action("List", "UserManagement", new { rolesId = 0, page = 1 })
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function ($) {
+        $("#user-search-key").keyup(function (e) {
+            if (e.keyCode == 13) {
+                $.post("/Administration/UserManagement/FullSearch", {
+                    keys: $("#user-search-key").val()
+                }, function (data) {
+                    $(".listuser").html(data);
+                })
+            }
+        })
+    })(jQuery)
+
+</script>
+

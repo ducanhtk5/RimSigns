@@ -1,0 +1,130 @@
+﻿@{
+    ViewBag.Title = "Sign Estimation contractor signs services| customized yard signs| commercial signCoppell";
+    ViewBag.Keywords = "sign for advertising Carrollton, cheap contractor signs, sign for advertising near Coppell, outdoor business sign Dallas, sign for advertising Carrollton";
+    ViewBag.Description = "Real Estate Media signs are made and installed in-house by our team of 9 dedicated employees to ensure strict quality control and accountability.";
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using CMSApplication.Models;
+@model CMSApplication.Models.EstimatePage
+
+<div class="page-header">
+        <h1>Sign Estimation</h1>
+    </div>           
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>Please enter your information on the form below</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Html.BeginForm("EstimatePage_Submit", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class="validation" }))
+            {
+                <div class="warning-area">
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Full name :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Name, new { @style = "width:500px", @class="validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                      Phone number :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Phone, new { @style = "width:500px", @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Company Name :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.CompanyName, new { @style = "width:500px", @class = "validate[required]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Email :
+                    </div>
+                    <div class="span5">
+                        @Html.TextBoxFor(model => Model.Email, new { @style = "width:500px", @class = "validate[required,custom(email)]" })</div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        Description :
+                    </div>
+                    <div class="span9">
+                        @Html.TextAreaFor(model => Model.Comment, new { @style = "width:500px; height:150px", @class = "validate[required]" })
+                        </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                       Attach files</div>
+                    <div class="span3" id="upload_list"><input type="file" name="FileUp" />
+                    <a id="addfile" href="javascript:void(0)"><img src="/Areas/Administration/Content/img/add.png" alt="add file" /></a> 
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="row-form">
+                    <div class="span2">
+                        &nbsp;
+                    </div>
+                    <div class="span5">
+                        <!-- captcha -->
+                        @Html.ValidationSummary(true)   
+                        @Html.Partial("_Captcha", new CMSApplication.Areas.Administration.Models.Captcha())
+                        @Html.Partial("_InvisibleCaptcha", new CMSApplication.Areas.Administration.Models.InvisibleCaptcha())    
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+                
+                <div class="row-form">
+                    <div class="span2">
+                    </div>
+                    <div class="span5">
+                    <input type="submit" name="save" value="Submit" class="btn" /></div>
+                     <div class="clear"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<script language=javascript>
+    /////// Add Multiplte
+    var max_input = 11;
+    var now_input = 0;
+    jQuery(document).ready(function () {
+
+        jQuery("#addfile").click(function () {
+            now_input++;
+            if (now_input >= max_input)
+                return false;
+            //add file
+            var input = document.createElement("input");
+            input.type = "file";
+            input.name = "FileUp";
+
+            //---
+            jQuery('#upload_list').append(input);
+            jQuery('#upload_list').find("input:file").not(".skip").uniform();
+        });
+    });
+</script>

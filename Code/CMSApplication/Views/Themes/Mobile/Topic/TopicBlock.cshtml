@@ -1,0 +1,31 @@
+﻿@using CMSApplication.Models
+@model TopicModel
+@{
+    ViewBag.Title = Model.Title + " " + Model.MetaTitle;
+    ViewBag.Keywords = Model.MetaKeywords;
+    ViewBag.Description = Model.MetaDescription;
+}
+@if (Model != null)
+{
+    <!-- Header -->
+    <div data-role="header" data-position="fixed">
+        <h1>
+            @if (@Model.Title != "")
+            {
+                @Model.Title
+            }
+        </h1>
+        <a href="#sideNav" id="navIcon"><i class="icon-th-list"></i></a>
+    </div>
+    <!-- End Header -->
+    <!-- Content Start -->
+    <div data-role="content">
+        <div class="topic_body">
+            @Html.Raw(Model.Body)
+        </div>
+
+        @Html.Action("FooterMenu", "Navigation")
+        <!-- /footer -->
+    </div>
+    <!-- End Content -->
+}

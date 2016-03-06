@@ -1,0 +1,93 @@
+﻿@using CMS.Common.Helpers
+@model CMSApplication.Areas.Administration.Models.SettingModel 
+@{
+    ViewBag.Title = "Add Setting";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        HttpMethod = "post",
+        OnComplete = "CompleteAjaxRequest"
+    };
+}
+<script type="text/javascript">
+
+    function CompleteAjaxRequest(obj) {
+
+        var returnObj = eval('(' + obj.responseText + ')');
+
+        if (returnObj.Status == "success") {
+            if (returnObj.Message != null) {
+                $.pnotify({
+                    title: 'Success',
+                    text: returnObj.Message,
+                    type: 'info',
+                    opacity: .8
+                });
+                $("form input:text").val('');
+                $("form input:password").val('');
+                $("form textarea").val('');
+            }
+            else if (returnObj.RedirectUrl != null) {
+                window.location.href = returnObj.RedirectUrl;
+            }
+        } else {
+            $.pnotify({
+                title: 'Error',
+                text: returnObj.Message,
+                type: 'error',
+                opacity: .8
+            });
+        }
+
+        return false;
+    };
+
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+               Edit Setting</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Ajax.BeginForm("AddOrUpdateSetting", "Setting", null, ajaxOpts, new { enctype = "multipart/form-data" }))
+            {
+                    <div class="warning-area">
+                    </div>
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="row-form">
+                        <div class="span2">
+                            Setting name :</div>
+                        <div class="span8">
+                            @Html.TextBoxFor(x => x.SettingName, new { @class = "span8" })</div>
+                            <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Title:</div>
+                        <div class="span8">
+                            @Html.TextBoxFor(x => x.Title, new { @class = "span8" })</div>
+                            <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Content :
+                        </div>
+                        <div class="span8">
+                            @Html.TextAreaFor(x => x.Body, new { @cols = "5",  @row = "5",@style="height:50px;"})</div>
+                            <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                        </div>
+                        <div class="span8">
+                            <input type="submit" class="btn" value="Submit" /></div>
+                            <div class="clear"></div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>

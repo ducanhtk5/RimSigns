@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Gallery Management";
+}
+
+
+<a class="btn AddNews" data-dialog-id="addCate" data-dialog-title="Add New Images"
+                    href="/Administration/GalleryManager/AddCatalogGallery"><span>Add new Gallery</span></a>
+
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Gallery Management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid listRolesName listItemroles">
+        @Html.Action("ListCataLogGallery", "GalleryManager", null)
+    </div>
+</div>
+

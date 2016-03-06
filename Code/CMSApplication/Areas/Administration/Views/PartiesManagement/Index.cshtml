@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Parties management";
+}
+
+<a class="btn" href="/Administration/PartiesManagement/Add"><span>Add new Party</span></a>
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Parties management</h1>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid list">
+         @Html.Action("List", "PartiesManagement", new { page = 1 })
+    </div>
+</div>
+

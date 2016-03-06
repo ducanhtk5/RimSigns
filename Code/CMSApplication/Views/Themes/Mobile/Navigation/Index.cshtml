@@ -1,0 +1,40 @@
+﻿@using CMS.Data
+@model List<Navigation>
+@if (Model.Count() > 0)
+{
+    var listParent = Model.Where(l => l.ParentID == 0).ToList();
+    int i = 0;
+    
+
+    <ul id="sidePanel" class="clleft">
+        <li>
+            <img src="/Content/img/remsigns/images/logo.jpg"  style="max-width: 190px;" />
+        </li>
+        @foreach (var item in listParent)
+        {
+            var listChild = Model.Where(l => l.ParentID == item.Id).ToList();
+            
+            <li>
+                <a href="/@item.Link">
+                    <i class="icon-lightbulb"></i>@item.Name
+                </a>
+                @if (listChild.Count() > 0)
+                {
+                    <ul>
+                        @foreach (var item_sub in listChild)
+                        {
+
+                            <li><a href="/@item_sub.Link">@item_sub.Name</a></li>
+                        }
+                    </ul>
+                }
+            </li>
+        }
+       @* <li id="active">
+            <a href="#"><i class="icon-home"></i>Home</a></li>
+
+        <li><a href="typography.html"><i class="icon-star"></i>Features</a></li>
+        <li><a href="typography.html"><i class="icon-font"></i>Typography</a></li>
+        <li><a href="contact.html"><i class="icon-envelope"></i>Contact Us</a></li>*@
+    </ul>
+}

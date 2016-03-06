@@ -1,0 +1,18 @@
+﻿@using CMSApplication.Areas.Administration.Models
+@model TopicModel
+@if (Model != null)
+{
+    <div class="title_panel">
+        <div class="title_panel_left">
+            <div class="title">
+                @Model.Title</div>
+            <div class="title_b">
+            </div>
+        </div>
+    </div>
+    <blockquote>
+        <div>@MvcHtmlString.Create(@Model.Body)</div>
+    </blockquote>
+    <div class="clear">
+    </div>
+}

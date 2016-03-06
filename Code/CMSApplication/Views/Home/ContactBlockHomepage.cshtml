@@ -1,0 +1,61 @@
+﻿<!-- homepage contact form -->
+<div id="conder2">
+        <div class="contact_mid">
+        <div class="contact_title">Contact Form</div>
+        <div class="contact_text">Fill out the form to get more information!</div>
+        <div class="contact_form_panel">
+                <input name="Name" type="text"  id="Name" class="text_field" placeholder="Name"/>
+                <input name="Phone" type="text" id="Phone" class="text_field" placeholder="Phone"/>
+                <input name="Email" type="text" id="Email" class="text_field" placeholder="Email"/>
+                <textarea rows="3" name="Comment" class="Comment" id="Comment" style="width:248px" placeholder="Comment">
+                </textarea>
+                @Html.ValidationSummary(true)   
+
+                <!-- captcha -->
+                @Html.Partial("_Captcha", new CMSApplication.Areas.Administration.Models.Captcha())
+                @Html.Partial("_InvisibleCaptcha", new CMSApplication.Areas.Administration.Models.InvisibleCaptcha())                   
+                <!-- captcha -->
+
+                 <div align="center" style="padding-top: 10px";>
+                      <input type="submit" class="btn submitBtn" value="Send Contact" />                            
+                </div>
+        </div>
+        </div>
+    <!--Aqui va el footer-->
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".submitBtn").click(function () {
+            $(".loading-box").fadeIn("slow");
+            $.post("/Home/SendContactMail", {
+                Email: $("#Email").val(),
+                Name: $("#Name").val(),
+                Phone: $("#Phone").val(),
+                Comment: $(".Comment").val(),
+                CaptchaValue: $("#CaptchaValue").val()
+            }, function (data) {
+                if (data == "ok") {
+                    $(".loading-box").fadeOut("slow");
+                    clear();
+                    alert("Your Message has been sent, Thank you...");
+                    window.location = "/Home/Index";
+                } else {
+                    $(".loading-box").fadeOut("slow");
+                    alert(data);
+                }
+            })
+
+        })
+
+
+
+        function clear() {
+            $("#Email").val("");
+            $("#Name").val("");
+            $("#Phone").val("");
+            $("#Comment").val("");
+        }
+
+    })
+</script>

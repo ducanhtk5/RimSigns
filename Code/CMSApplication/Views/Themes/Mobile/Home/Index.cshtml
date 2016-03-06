@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Homepage - business signs| sign design| design sign | signs Carrollton";
+    ViewBag.Keywords = "sign for my business, signs for business, commercial signs for businesses; yard signs uthlake TX, business Sign Company in Southlake Texas";
+    ViewBag.Description = "At Real Estate Media we manufacture and install any sign needed to market a commercial property throughout the Dallas Fort Worth, Texas area and the surrounding State.";
+    
+}
+@model List<CMSApplication.Models.SlideModel>
+<!-- Header -->
+<div data-role="header" data-position="fixed">
+    <h1>Real Estate Media</h1>
+    <a href="#sideNav" id="navIcon"><i class="icon-th-list"></i></a>
+</div>
+<!-- End Header -->
+<!-- Content Start -->
+<div data-role="content">
+    <!-- Slider Start -->
+    <div class="flexslider">
+        <ul class="slides">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <img src="@Url.Content("~/Content/File/ImagesUpload/" + item.Images)" />
+                </li>
+            }
+        </ul>
+    </div>
+    <!-- Slider End -->
+    @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Homepage_Welcome_to_Real_Estate_Media", show_title = true })
+
+    <!--Site Slogan  -->
+    <div class="ui-grid-solo">
+        @*<h1 class="intro">Welcome to Real Estate Media.</h1>*@
+        <a href="#" data-role="button" class="btn swatch-2">Estimate Request</a>
+    </div>
+    <!-- Slogan End -->
+
+    <br />
+    @Html.Action("TopicBySystemWithTitle", "Topic", new { systemname = "Products_Services", show_title = true })
+
+
+    @*<!-- Services Block -->
+    <div class="section-header">
+        <h2 class="title">Services</h2>
+    </div>
+    <!-- Block one -->
+    <div class="clleft blocks">
+        <div class="bg-round swatch-4 left">
+            <i class="icon icon-book"></i>
+        </div>
+        <h3>Well Documented</h3>
+        <p>Bhatia to Harbhajan Singh, 1 run, very full but quicker too, outside the off stump and driven down the ground for a single</p>
+    </div>
+    <!-- End Block One -->
+    <!-- Block Two -->
+    <div class="clleft blocks">
+        <div class="bg-round swatch-5 left">
+            <i class="icon icon-pencil"></i>
+        </div>
+        <h3>Optimized Code</h3>
+        <p>Bhatia to Harbhajan Singh, 1 run, very full but quicker too, outside the off stump and driven down the ground for a single</p>
+    </div>
+    <!-- End Block Twon -->
+    <!-- Block Three -->
+    <div class="clleft blocks">
+        <div class="bg-round swatch-7 left">
+            <i class="icon icon-star"></i>
+        </div>
+        <h3>And Its FREE</h3>
+        <p>Bhatia to Harbhajan Singh, 1 run, very full but quicker too, outside the off stump and driven down the ground for a single</p>
+    </div>
+    <!-- End Block Three -->*@
+
+     @Html.Action("FooterMenu", "Navigation")
+    <!-- /footer -->
+</div>
+<!-- End Content -->

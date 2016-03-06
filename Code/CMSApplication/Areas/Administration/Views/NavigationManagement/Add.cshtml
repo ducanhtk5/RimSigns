@@ -1,0 +1,150 @@
+﻿@model CMSApplication.Areas.Administration.Models.NavigationModel 
+@{
+    ViewBag.Title = "Add Menu";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        HttpMethod = "post",
+        OnComplete = "CompleteAjaxRequest"
+    };
+}
+<script type="text/javascript">
+
+    function CompleteAjaxRequest(obj) {
+
+        var returnObj = eval('(' + obj.responseText + ')');
+
+        if (returnObj.Status == "success") {
+            if (returnObj.Message != null) {
+                $.pnotify({
+                    title: 'Success',
+                    text: returnObj.Message,
+                    type: 'info',
+                    opacity: .8
+                });
+                $("form input:text").val('');
+                $("form input:password").val('');
+                $("form textarea").val('');
+            }
+            else if (returnObj.RedirectUrl != null) {
+                window.location.href = returnObj.RedirectUrl;
+            }
+        } else {
+            $.pnotify({
+                title: 'Error',
+                text: returnObj.Message,
+                type: 'error',
+                opacity: .8
+            });
+        }
+
+        return false;
+    };
+    $(document).ready(function () {
+        $('.checklink').trigger('click');
+        $(".link").fadeIn();
+        $("input.text").keyup(function () {
+            var value = $(this).val();
+            $("i.link").text(value);
+        }).keyup();
+        $(".checklink").click(function () {
+            $("#Link").val("");
+            $(".link").fadeIn();
+            $(".topic").hide();
+        });
+        $(".checktopic").click(function () {
+            $(".topic").fadeIn();
+            $(".link").hide();
+        });
+        $('input[name=listtopic]').click(function () {
+            $('#Link').val($(this).val())
+        });
+    });
+</script>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="head">
+            <div class="isw-documents">
+            </div>
+            <h1>
+                Add new menu item</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block-fluid">
+            @using (Ajax.BeginForm("AddOrUpdate", "NavigationManagement", null, ajaxOpts, new { enctype = "multipart/form-data" }))
+            {
+                    <div class="warning-area">
+                    </div>
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.OrderMenu)
+                    <div class="row-form">
+                        <div class="span2">
+                            Parent menu :
+                        </div>
+                        <div class="span5">
+                            @Html.DropDownList("ParentId")
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Name :
+                        </div>
+                        <div class="span5">
+                            @Html.TextBoxFor(x => x.Name, new { @class = "span8" })</div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Map to:
+                        </div>
+                        <div class="span5">
+                            <input type="radio" value="Link" name="1" class="checklink" />
+                            Link
+                            <br />
+                            <input type="radio" value="Topic" name="1" class="checktopic" />
+                            Topic
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row-form link hide">
+                        <div class="span2">
+                        </div>
+                        <div class="span9">
+                            @Html.TextBoxFor(x => x.Link, new { @class = "span8 text" })
+                            <br />
+                            <i>Example : @Request.Url.Host/</i><i class="link">Link</i>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row-form topic hide">
+                        <div class="span2">
+                        </div>
+                        <div class="span9">
+                            @Html.Action("ListTopic", "TopicManagement")
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                            Active :
+                        </div>
+                        <div class="span5">
+                            @Html.CheckBoxFor(m => m.Active)
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="row-form">
+                        <div class="span2">
+                        </div>
+                        <div class="span5">
+                            <br />
+                            <input type="submit" class="btn btn-info btnSubmit" value="Submit" /></div>
+                            <div class="clear"></div>
+                    </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "ProfileAccount";
+    Layout = "~/Views/Shared/_ClientProfileLayout.cshtml";
+}
+
+@model CMSApplication.Models.UserModel
+
+<div class="row-fluid">
+
+    <div class="span12">                    
+                    <div class="head">
+                        <div class="isw-users"></div>
+                        <h1>Users</h1>      
+                        <div class="clear"></div>
+                    </div>
+                    <div class="block-fluid">
+                        <table cellpadding="0" cellspacing="0" width="100%" class="table listUsers">
+                            <tbody>
+                                
+                                <tr>                                    
+                                    <td width="60">
+                                        <a href="#"><img width="50" height="50" src="@Url.Content("~/Content/File/Remsigns/" + Model.CompanyLogo)" class="img-polaroid"/></a>
+                                        <p class="actions">
+                                            <a href="@Url.Action("EditProfile","Home")" title="Edit Profile"><span class="icon-pencil"></span></a> 
+                                            <a href="@Url.Action("ChangePass","Home")" title="Change Password"><span class="icon-wrench"></span></a> 
+@*                                            <a href="#"><span class="icon-remove"></span></a>  *@                                      
+                                        </p>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="user">@Model.FullName</a>
+                                        <p class="about">
+                                            <span class="icon-user"></span>@Model.UserName <br/>
+                                            <span class="icon-envelope"></span> @Model.Email <br/>
+                                            <span class="icon-home"></span> @Model.Phone
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+<br /><br /><br /><br /><br />

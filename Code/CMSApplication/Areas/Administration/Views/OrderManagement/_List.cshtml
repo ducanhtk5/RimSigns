@@ -1,0 +1,96 @@
+﻿@model List<CMSApplication.Areas.Administration.Models.OrderModels>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        //     $(".list").html("");
+
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var NameItem = $this.closest('tr').find('.spanName').html();
+            if (confirm("Are you sure delete order : " + NameItem + "")) {
+                var IdItem = $this.closest('tr').find('.Spanid').html();
+                $.get("/Administration/OrderManagement/Delete?Id=" + IdItem, function () {
+                    var page = parseInt($(".page-number-Current").html());
+                    $.get("/Administration/OrderManagement/List?userId=0&page=" + page, function (data) {
+                        $(".list").html("");
+                        $(".list").html(data);
+                    });
+                });
+            }
+        });
+
+        jQuery("#ListTable").dataTable({
+            "sPaginationType": "full_numbers",
+            "iDisplayLength": 30,
+            "bSortable": false,
+            "aLengthMenu": [30, 50, 100],
+        });
+
+        setTimeout(function () {
+            jQuery("#OrderDateColumn").trigger("click").trigger("click");
+        }, 500);
+    });
+
+</script>
+<table class="table dataTable" style="width: 100%" id="ListTable">
+    <thead>
+        <th>
+            Project Name
+        </th>
+        <th>
+            Order By
+        </th>
+        <th style="width: 60px;" id="OrderDateColumn">
+            Order Date
+        </th>
+        <th>
+            Address
+        </th>
+        <th style="width: 20px;">
+            Size
+        </th>
+        <th>
+            Type
+        </th>
+        <th style="width: 40px;">
+            Status
+        </th>
+        <th width="10px">
+            Action
+        </th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <span class="Spanid" style="display: none;">@item.Id</span> <span><a class="spanName" href="@Url.Action("Details", "OrderManagement", new { id = item.Id })">@item.Title</a>
+                    </span>
+                </td>
+                <td>
+                    <span><a href="@Url.Action("Index", "OrderManagement", new { userId = @item.OrderById })">
+                        @item.OrderByName</a> </span>
+                </td>
+                <td>
+                    <span>@string.Format("{0:MM/dd/yyyy}", item.OrderDate) </span>
+                </td>
+                <td>
+                    <span><a href="http://maps.google.com/maps?output=csv&oe=utf8&sensor=false&q=@item.Address" target="_blank">@item.Address</a></span>
+                </td>
+                <td>
+                    <span>@item.Size </span>
+                </td>
+                <td>
+                    <span>@item.Type </span>
+                </td>
+                <td>
+                    <span>@item.Status </span>
+                </td>
+                <td>
+                    <a href="@Url.Action("Edit", "OrderManagement", new { id = item.Id })" class="icon-pencil">
+                    </a><a href="javascript:void(0)" class="icon-trash delete"></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

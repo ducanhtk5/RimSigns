@@ -1,0 +1,54 @@
+﻿@model List<CMSApplication.Areas.Administration.Models.RolesModel>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("a.delete").click(function () {
+            var $this = $(this);
+            var NameItem = $this.closest('tr').find('.spanName').html();
+            if (confirm("Are you sure delete roles : " + NameItem + "")) {
+                var IdItem = $this.closest('tr').find('.Spanid').html();
+                $.get("/Administration/RolesManagement/Delete?id=" + IdItem, function () {
+                    $.get("/Administration/RolesManagement/List", function (data) {
+                        $(".list").html("");
+                        $(".list").html(data);
+                    });
+                });
+            }
+        });
+
+    });
+
+</script>
+@if (Model.Count() > 0)
+{
+    <table class="table" style="width:100%">
+        <thead>
+            <th>
+                Name
+            </th>
+            <th>
+                Active
+            </th>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="Spanid" style="display: none;">@item.Id</span> 
+                        <span class="spanName">@item.Name
+                        </span>
+                    </td>
+                    <td>
+                        <span >@item.Active </span>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <h2>
+        Have not roles.
+    </h2>
+}

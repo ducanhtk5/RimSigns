@@ -1,0 +1,251 @@
+﻿@using CMS.Common.Helpers;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>@ViewBag.Title - Real Estate Media</title>
+    <link href="@Url.ContentArea("~/Content/css/stylesheets.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="@Url.ContentArea("~/Content/css/fullcalendar.print.css")" media="print" />
+    <script src="@Url.ContentArea("~/Content/js/jquery.min.js")" type="text/javascript"></script>
+    <script src="@Url.ContentArea("~/Content/js/jquery-ui.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/jquery/jquery.mousewheel.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/cookie/jquery.cookies.2.2.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/bootstrap.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/charts/jquery.flot.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/charts/jquery.flot.stack.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/charts/jquery.flot.pie.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/charts/jquery.flot.resize.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/sparklines/jquery.sparkline.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/fullcalendar/fullcalendar.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/select2/select2.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/uniform/uniform.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/maskedinput/jquery.maskedinput-1.3.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/validation/languages/jquery.validationEngine-en.js")" charset="utf-8"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/validation/jquery.validationEngine.js")" charset="utf-8"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/animatedprogressbar/animated_progressbar.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/qtip/jquery.qtip-1.0.0-rc3.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/pnotify/jquery.pnotify.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/cleditor/jquery.cleditor.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/dataTables/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/fancybox/jquery.fancybox.pack.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins/datetimepicker/jquery-ui-timepicker-addon.js")"></script>
+    <link href="@Url.ContentArea("~/Content/css/dropdownlist/chosen.css")" rel="stylesheet" />
+    <script src="@Url.ContentArea("~/Content/js/dropdownlist/chosen.jquery.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/cookies.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/actions.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/charts.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/plugins.js")"></script>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/js/fileuploader.js")"></script>
+    <link rel="stylesheet" type="text/css" href="@Url.ContentArea("~/Content/css/fileuploader.css")"/>
+    <script type="text/javascript" src="@Url.ContentArea("~/Content/ckeditor/ckeditor.js")" ></script>
+</head>
+<body>
+    <div class="header">
+        <a class="logo" href="/Administration">
+            <img src="@Url.ContentArea("~/Content/img/logo_2.png")" alt="Aquarius -  responsive admin panel" title="Aquarius -  responsive admin panel"/></a>
+        <ul class="header_menu">
+            <li class="list_icon"><a href="#">&nbsp;</a></li>
+        </ul>
+    </div>
+    <div class="menu">
+        <div class="breadLine">
+            <div class="arrow">
+            </div>
+            <div class="adminControl active">
+                Hi, @User.Identity.Name
+            </div>
+        </div>
+        <div class="admin">
+            <div class="image">
+                <img src="@Url.ContentArea("~/Content/img/users/user.png")" class="img-polaroid" alt=""/>
+            </div>
+            <ul class="control">
+                <li><span class="icon-comment"></span><a target="_blank" href="@Url.Action("Index", "Home", new { area = "" })">
+                    Visit website</a></li>
+                <li><span class="icon-cog"></span><a href="@Url.Action("Index", "Setting")">Settings</a></li>
+                <li><span class="icon-share-alt"></span><a href="@Url.Action("LogOff", "Management")">
+                    Logout</a></li>
+            </ul>
+            @*<div class="info">
+                <span>Welcom back! Your last visit: 24.10.2012 in 19:55</span>
+            </div>*@
+        </div>
+        <ul class="navigation">
+            <li><a href="@Url.Action("Index", "OrderManagement")"><span class="isw-grid"></span><span
+                class="text">Dashboard</span> </a></li>
+            <li class="openable"><a href="#"><span class="isw-list"></span><span class="text">Membership
+                Management</span> </a>
+                <ul>
+                    <li><a href="@Url.Action("Index", "RolesManagement")"><span class="icon-th"></span><span
+                        class="text">Roles Management</span> </a></li>
+                    <li><a href="@Url.Action("Index", "UserManagement")"><span class="icon-th-large"></span>
+                        <span class="text">Clients/Users Management</span> </a></li>
+                </ul>
+            </li>
+            <li><a href="@Url.Action("Index", "OrderManagement", new { userId = 0 })"><span class="isw-bookmark"></span>
+                <span class="text">Order Management</span> </a></li>
+            <li><a href="@Url.Action("Index", "TopicManagement")"><span class="isw-archive"></span>
+                <span class="text">Content Management</span> </a></li>
+            <li><a href="@Url.Action("Index", "NavigationManagement")"><span class="isw-graph"></span>
+                <span class="text">Navigation Management</span> </a></li>
+            <li><a href="@Url.Action("Index", "Slide")"><span class="isw-text_document"></span><span
+                class="text">Slide Management</span> </a></li>
+            <li class="openable">
+                <a href="#"><span class="isw-list"></span><span class="text">
+                Gallery Management</span> </a>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "GalleryManager")"><span class="icon-th"></span><span
+                        class="text">Gallery Management</span> </a></li>
+                    <li><a href="@Url.Action("Gallery", "GalleryManager")"><span class="icon-th-large"></span>
+                        <span class="text">Images Management</span> </a></li>
+                        </ul>
+                    </li>
+            
+                @*<li><a href="@Url.Action("Index", "PartiesManagement")"><span class="isw-user"></span>
+                <span class="text">Parties Management</span> </a></li>*@
+            <li class="openable active"><a href="@Url.Action("Index", "Setting")"><span class="isw-settings">
+            </span><span class="text">Setting Management</span> </a>
+                <ul>
+                    <li class="active"><a href="@Url.Action("Index", "Setting")"><span class="icon-wrench">
+                    </span><span class="text">Setting</span> </a></li>
+                    <li><a href="@Url.Action("EmailSetting", "Setting")"><span class="icon-envelope"></span>
+                        <span class="text">Email </span></a></li>
+                        <li><a href="@Url.Action("Index", "EmailLogs")"><span class="icon-envelope"></span>
+                        <span class="text">Email Logs </span></a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="dr">
+            <span></span>
+        </div>
+        <div class="widget-fluid">
+            <div id="menuDatepicker">
+            </div>
+        </div>
+        <div class="dr">
+            <span></span>
+        </div>
+    </div>
+    <div class="content">
+        <div class="breadLine">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Action("Index", "OrderManagement")">Admin</a> <span class="divider">></span>
+                    <a href="@Url.Action("Index", HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString())">
+                        @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()</a>
+                    <span class="divider">></span> </li>
+                <li class="active">@ViewBag.Title</li>
+            </ul>
+            <ul class="buttons">
+                <li><a href="#" class="link_bcPopupList"><span class="icon-user"></span><span class="text">
+                    Users list</span></a>
+                    <div id="bcPopupList" class="popup">
+                        <div class="head">
+                            <div class="arrow">
+                            </div>
+                            <span class="isw-users"></span><span class="name">List users</span>
+                            <div class="clear">
+                            </div>
+                        </div>
+                        <div class="body-fluid users">
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Aqvatarius</a> <span>online</span>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Olga</a> <span>online</span>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Alexey</a> <span>online</span>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Dmitry</a> <span>online</span>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Helen</a>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="@Url.ContentArea("~/Content/img/users/usericon.png")" alt="" width="32"/></a></div>
+                                <div class="info">
+                                    <a href="#" class="name">Alexander</a>
+                                </div>
+                                <div class="clear">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            <button class="btn" type="button">
+                                Add new</button>
+                            <button class="btn btn-danger link_bcPopupList" type="button">
+                                Close</button>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#" class="link_bcPopupSearch"><span class="icon-search"></span><span
+                    class="text">Search</span></a>
+                    <div id="bcPopupSearch" class="popup">
+                        <div class="head">
+                            <div class="arrow">
+                            </div>
+                            <span class="isw-zoom"></span><span class="name">Search</span>
+                            <div class="clear">
+                            </div>
+                        </div>
+                        <div class="body search">
+                            <input type="text" placeholder="Some text for search..." name="search" />
+                        </div>
+                        <div class="footer">
+                            <button class="btn" type="button">
+                                Search</button>
+                            <button class="btn btn-danger link_bcPopupSearch" type="button">
+                                Close</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="workplace">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

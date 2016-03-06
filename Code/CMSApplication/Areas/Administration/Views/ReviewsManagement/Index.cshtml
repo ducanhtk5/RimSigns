@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Reviews management";
+}
+<div class="row-fluid">
+    <div class="span3">
+    <a class="btn" href="@Url.Action("Add","ReviewsManagement")"><span>Add new review</span></a>
+    </div>
+    <div class="span9">
+        <div class="widget" style="float: right;">
+                    <div class="input-append">
+                        <input class="textfield" id="appendedInputButton" type="text" />
+                        <input  class="btn btnsort" type="button" value="Search" />
+                            
+                    </div>
+                </div>
+    </div>
+</div>
+
+<div class="head">
+    <div class="isw-grid">
+    </div>
+    <h1>
+        Reviews management</h1>
+        <ul class="buttons">
+                            <li><a href="javascript:void(0)" class="refresh isw-refresh"></a></li>                                                        
+                            <li><a href="#" class="isw-attachment"></a></li>
+                            <li>
+                                <a href="#" class="isw-settings"></a>
+                                <ul class="dd-list">
+                                    <li><a href="#"><span class="isw-plus"></span> New document</a></li>
+                                    <li><a href="#"><span class="isw-edit"></span> Edit</a></li>
+                                    <li><a href="#"><span class="isw-delete"></span> Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+    <div class="clear">
+    </div>
+</div>
+<div class="block-fluid table-sorting">
+    <div class="row-fluid list">
+        @Html.Action("List", "ReviewsManagement", new { page = 1 })
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(".btnsort").click(function () {
+            var page = parseInt($(".page-number-Current").html());
+            if (isNaN(page)) { page = 1; };
+            var name=$(".textfield").val();
+            $.get("/Administration/ReviewsManagement/ListSort?page=" + page + "&name=" + name, function (data) {
+                $(".list").html("");
+                $(".list").html(data);
+            });
+        });
+
+        $(".refresh").click(function () {
+            var page = parseInt($(".page-number-Current").html());
+            if (isNaN(page)) { page = 1; };
+            $.get("/Administration/ReviewsManagement/List?page=" + page, function (data) {
+                $(".list").html("");
+                $(".list").html(data);
+            });
+        });
+        $('.textfield').keyup(function (event) {
+            if (event.keyCode == '13') {
+                event.preventDefault();
+                var page = parseInt($(".page-number-Current").html());
+                if (isNaN(page)) { page = 1; };
+                var name = $(".textfield").val();
+                $.get("/Administration/ReviewsManagement/ListSort?page=" + page + "&name=" + name, function (data) {
+                    $(".list").html("");
+                    $(".list").html(data);
+                });
+            }
+            return false;
+        });
+    
+</script>
