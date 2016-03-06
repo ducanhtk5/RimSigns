@@ -10,5 +10,6 @@ sopiaxk/123456
 # Liên hệ:
 sopiaxk@gmail.com hoặc sopiaxk@outlook.com
 
-Nguồn: http://sinhvienit.net/forum/share-source-code-asp-net-mvc-ef-sql-server-boostrap.368446.html
-Tác giả: chinhdv (người chia sẻ).
+# Nguồn và tác giả
+- Nguồn: http://sinhvienit.net/forum/share-source-code-asp-net-mvc-ef-sql-server-boostrap.368446.html
+- Tác giả: chinhdv (người chia sẻ).
