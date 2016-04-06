@@ -70,9 +70,8 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Recaptcha, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Recaptcha.dll</HintPath>
+    <Reference Include="Recaptcha">
+      <HintPath>..\..\Libs\Recaptcha.dll</HintPath>
     </Reference>
     <Reference Include="System.configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
